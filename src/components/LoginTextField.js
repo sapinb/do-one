@@ -38,9 +38,13 @@ const LoginTextField = ({ iconName = 'user-o', style, ...props }) =>
 
 const UsernameField = withProps({ iconName: 'user-o', placeholder: 'Username' })(LoginTextField)
 const PasswordField = withProps({ iconName: 'lock', placeholder: 'Password', secureTextEntry: true })(LoginTextField)
+const NameField = withProps({ iconName: 'user', placeholder: 'Name' })(LoginTextField)
+const EmailField = withProps({ iconName: 'envelope-o', placeholder: 'Email' })(LoginTextField)
 
 export {
   LoginTextField,
   UsernameField,
   PasswordField,
+  NameField,
+  EmailField,
 }
