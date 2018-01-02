@@ -8,8 +8,9 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native'
-import { Constants, ScreenOrientation, Svg } from 'expo'
+import { ScreenOrientation, Svg } from 'expo'
 
+import { StatusBarSpacer } from '../components/StatusBarSpacer'
 import { UsernameField, PasswordField } from '../components/LoginTextField'
 import { LoginButton as SignInButton } from '../components/LoginButton'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
@@ -68,9 +69,6 @@ const SignUp = ({ onPress = noop }) =>
       <Text style={styles.SignUpTextTouchable}>Sign Up</Text>
     </TouchableOpacity>
   </View>
-
-const StatusBarSpacer = () =>
-  <View style={{ height: Constants.statusBarHeight }} />
 
 class LoginScreen extends React.Component {
   componentWillMount () {
