@@ -3,15 +3,14 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
   ImageBackground,
   ScrollView,
 } from 'react-native'
-import { FontAwesome } from '@expo/vector-icons'
 import { Constants, ScreenOrientation, Svg } from 'expo'
-import { withProps } from 'recompose'
+
+import { UsernameField, PasswordField } from '../components/LoginTextField'
 
 const noop = () => {}
 
@@ -32,27 +31,6 @@ const LogoSvg = () =>
       <Svg.Rect x={50} y={100} width={100} height={20} fill='#ff3366' rotate={-45} origin='60, 110' />
     </Svg>
   </View>
-
-const LoginField = ({ iconName = 'user-o', placeholder = 'Username' }) =>
-  <View style={{
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    height: 60,
-    borderBottomColor: '#fff8',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    alignItems: 'center',
-  }}>
-    <FontAwesome name={iconName} style={{
-      fontSize: 20,
-      color: '#fff',
-      paddingLeft: 25,
-      paddingRight: 15,
-    }} />
-    <TextInput placeholder={placeholder} style={{ flex: 1 }} underlineColorAndroid='transparent' />
-  </View>
-
-const UsernameField = withProps({ iconName: 'user-o', placeholder: 'Username' })(LoginField)
-const PasswordField = withProps({ iconName: 'lock', placeholder: 'Password' })(LoginField)
 
 const ForgotPassword = ({ onPress = noop }) =>
   <View style={{ height: 60, alignItems: 'flex-end', padding: 10 }}>
