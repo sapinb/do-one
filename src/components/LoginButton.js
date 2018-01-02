@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 
 import { noop } from '../utils'
+import colors from '../constants/colors'
 
 export const LoginButton = ({ onPress = noop, title = 'Sign In' }) =>
   <TouchableOpacity
@@ -10,7 +11,7 @@ export const LoginButton = ({ onPress = noop, title = 'Sign In' }) =>
       height: 60,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#ff3366'
+      backgroundColor: colors.radicalRed
     }}>
     <Text style={{ color: '#fff' }}>{title}</Text>
   </TouchableOpacity>

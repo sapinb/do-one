@@ -3,24 +3,26 @@ import { View, StyleSheet, TextInput } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 import { withProps } from 'recompose'
 
+import colors from '../constants/colors'
+
 const styles = StyleSheet.create({
   textFieldContainer: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     height: 60,
-    borderBottomColor: '#fff8',
+    borderBottomColor: colors.white50,
     borderBottomWidth: StyleSheet.hairlineWidth,
     alignItems: 'center',
   },
   icon: {
     fontSize: 20,
-    color: '#fff',
+    color: colors.white,
     paddingLeft: 25,
     paddingRight: 15,
   },
   textInput: {
     flex: 1,
-    color: '#fff',
+    color: colors.white,
   },
 })
 

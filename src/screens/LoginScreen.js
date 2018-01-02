@@ -14,6 +14,7 @@ import { UsernameField, PasswordField } from '../components/LoginTextField'
 import { LoginButton as SignInButton } from '../components/LoginButton'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { noop } from '../utils'
+import colors from '../constants/colors'
 
 const styles = StyleSheet.create({
   LogoContainer: {
@@ -28,10 +29,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   SignUpText: {
-    color: '#777',
+    color: colors.white50,
   },
   SignUpTextTouchable: {
-    color: '#fff',
+    color: colors.white,
+  },
+  ForgotPasswordContainer: {
+    height: 60,
+    alignItems: 'flex-end',
+    padding: 10,
+  },
+  ForgotPasswordText: {
+    color: colors.white50,
   },
 })
 
@@ -39,15 +48,16 @@ const LogoSvg = () =>
   <View style={styles.LogoContainer}>
     <Svg height={160} width={160}>
       <Svg.Circle cx={80} cy={80} r={80} fill='#fff' />
-      <Svg.Rect x={50} y={100} width={50} height={20} fill='#dd436a' rotate={-135} origin='60, 110' />
-      <Svg.Rect x={50} y={100} width={100} height={20} fill='#ff3366' rotate={-45} origin='60, 110' />
+      <Svg.Rect x={50} y={100} width={50} height={20} fill={colors.radicalRed} rotate={-135} origin='60, 110' />
+      <Svg.Rect x={50} y={100} width={50} height={20} fill='#0002' rotate={-135} origin='60, 110' />
+      <Svg.Rect x={50} y={100} width={100} height={20} fill={colors.radicalRed} rotate={-45} origin='60, 110' />
     </Svg>
   </View>
 
 const ForgotPassword = ({ onPress = noop }) =>
-  <View style={{ height: 60, alignItems: 'flex-end', padding: 10 }}>
+  <View style={styles.ForgotPasswordContainer}>
     <TouchableOpacity onPress={onPress}>
-      <Text style={{ color: '#fff' }}>Forgot Password</Text>
+      <Text style={styles.ForgotPasswordText}>Forgot Password</Text>
     </TouchableOpacity>
   </View>
 
