@@ -88,6 +88,8 @@ class SignUpScreen extends React.Component {
 
   goBack = () => this.props.navigation.goBack()
 
+  toWalkthroughScreen = () => this.props.navigation.navigate('WalkthroughScreen')
+
   render () {
     return (
       <ImageBackground
@@ -107,7 +109,7 @@ class SignUpScreen extends React.Component {
             <PasswordField />
           </KeyboardAvoidingView>
           <View style={{ flex: 1 }} />
-          <SignUpButton title='Sign Up' />
+          <SignUpButton title='Sign Up' onPress={this.toWalkthroughScreen} />
           <SignIn onPress={this.goBack} />
         </ScrollView>
       </ImageBackground>

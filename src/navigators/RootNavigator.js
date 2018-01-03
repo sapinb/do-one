@@ -9,7 +9,7 @@ const RootNavigator = StackNavigator({
   SignUpScreen: { screen: SignUpScreen },
   WalkthroughScreen: { screen: WalkthroughScreen },
 }, {
-  initialRouteName: 'WalkthroughScreen',
+  initialRouteName: 'LoginScreen',
   headerMode: 'none'
 })
 
