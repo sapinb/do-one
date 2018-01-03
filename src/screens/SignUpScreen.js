@@ -11,6 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons'
 import { ScreenOrientation } from 'expo'
 
+import { resetTo } from '../navigators/navigationActions'
 import { StatusBarSpacer } from '../components/StatusBarSpacer'
 import { UsernameField, PasswordField, NameField, EmailField } from '../components/LoginTextField'
 import { LoginButton as SignUpButton } from '../components/LoginButton'
@@ -88,7 +89,7 @@ class SignUpScreen extends React.Component {
 
   goBack = () => this.props.navigation.goBack()
 
-  toWalkthroughScreen = () => this.props.navigation.navigate('WalkthroughScreen')
+  toWalkthroughScreen = () => this.props.navigation.dispatch(resetTo({ routeName: 'WalkthroughScreen' }))
 
   render () {
     return (
