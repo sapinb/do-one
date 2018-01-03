@@ -1,7 +1,7 @@
 import { StackNavigator } from 'react-navigation'
 
-import { LoginScreen } from '../screens/LoginScreen'
-import { SignUpScreen } from '../screens/SignUpScreen'
+import LoginScreen from '../screens/LoginScreen'
+import SignUpScreen from '../screens/SignUpScreen'
 
 const RootNavigator = StackNavigator({
   LoginScreen: { screen: LoginScreen },

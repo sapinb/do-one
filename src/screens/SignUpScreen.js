@@ -102,4 +102,4 @@ class SignUpScreen extends React.Component {
   }
 }
 
-export { SignUpScreen }
+export default SignUpScreen

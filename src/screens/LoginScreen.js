@@ -102,4 +102,4 @@ class LoginScreen extends React.Component {
   }
 }
 
-export { LoginScreen }
+export default LoginScreen
