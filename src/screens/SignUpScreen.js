@@ -24,16 +24,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  SignUpContainer: {
+  SignInContainer: {
     height: 60,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  SignUpText: {
+  SignInText: {
     color: colors.white50,
   },
-  SignUpTextTouchable: {
+  SignInTextTouchable: {
     color: colors.white,
   },
   ForgotPasswordContainer: {
@@ -44,25 +44,36 @@ const styles = StyleSheet.create({
   ForgotPasswordText: {
     color: colors.white50,
   },
-})
-
-const BackButton = () =>
-  <TouchableOpacity style={{ width: 60, height: 60, alignItems: 'center', justifyContent: 'center' }}>
-    <Ionicons name='ios-arrow-round-back-outline' style={{ fontSize: 60, color: colors.white }} />
-  </TouchableOpacity>
-
-const SignUpText = () =>
-  <Text style={{
+  BackButtonContainer: {
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  BackButtonIcon: {
+    fontSize: 60,
+    color: colors.white,
+  },
+  SignUpText: {
     fontSize: 40,
     color: colors.white,
     paddingHorizontal: 20,
-  }}>Sign Up</Text>
+  }
+})
+
+const BackButton = ({ onPress = noop }) =>
+  <TouchableOpacity style={styles.BackButtonContainer} onPress={onPress}>
+    <Ionicons name='ios-arrow-round-back-outline' style={styles.BackButtonIcon} />
+  </TouchableOpacity>
+
+const SignUpText = () =>
+  <Text style={styles.SignUpText}>Sign Up</Text>
 
 const SignIn = ({ onPress = noop }) =>
-  <View style={styles.SignUpContainer}>
-    <Text style={styles.SignUpText}>Already have an account? </Text>
+  <View style={styles.SignInContainer}>
+    <Text style={styles.SignInText}>Already have an account? </Text>
     <TouchableOpacity onPress={onPress}>
-      <Text style={styles.SignUpTextTouchable}>Sign In</Text>
+      <Text style={styles.SignInTextTouchable}>Sign In</Text>
     </TouchableOpacity>
   </View>
 
@@ -75,6 +86,8 @@ class SignUpScreen extends React.Component {
     ScreenOrientation.allow(ScreenOrientation.Orientation.ALL_BUT_UPSIDE_DOWN)
   }
 
+  goBack = () => this.props.navigation.goBack()
+
   render () {
     return (
       <ImageBackground
@@ -84,7 +97,7 @@ class SignUpScreen extends React.Component {
         <BackgroundOverlay backgroundColor='#000' opacity={0.25} />
         <StatusBarSpacer />
         <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flex: 1 }} >
-          <BackButton />
+          <BackButton onPress={this.goBack} />
           <SignUpText />
           <View style={{ height: 20 }} />
           <KeyboardAvoidingView behavior='padding'>
@@ -95,7 +108,7 @@ class SignUpScreen extends React.Component {
           </KeyboardAvoidingView>
           <View style={{ flex: 1 }} />
           <SignUpButton title='Sign Up' />
-          <SignIn />
+          <SignIn onPress={this.goBack} />
         </ScrollView>
       </ImageBackground>
     )

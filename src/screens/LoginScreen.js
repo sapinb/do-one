@@ -79,6 +79,8 @@ class LoginScreen extends React.Component {
     ScreenOrientation.allow(ScreenOrientation.Orientation.ALL_BUT_UPSIDE_DOWN)
   }
 
+  toSignUpScreen = () => this.props.navigation.navigate('SignUpScreen')
+  
   render () {
     return (
       <ImageBackground
@@ -95,7 +97,7 @@ class LoginScreen extends React.Component {
             <ForgotPassword />
             <SignInButton title='Sign In' />
           </KeyboardAvoidingView>
-          <SignUp />
+          <SignUp onPress={this.toSignUpScreen} />
         </ScrollView>
       </ImageBackground>
     )
