@@ -80,7 +80,9 @@ class LoginScreen extends React.Component {
   }
 
   toSignUpScreen = () => this.props.navigation.navigate('SignUpScreen')
-  
+
+  toHomeScreen = () => this.props.navigation.navigate('MainDrawer')
+
   render () {
     return (
       <ImageBackground
@@ -95,7 +97,7 @@ class LoginScreen extends React.Component {
             <UsernameField />
             <PasswordField />
             <ForgotPassword />
-            <SignInButton title='Sign In' />
+            <SignInButton title='Sign In' onPress={this.toHomeScreen} />
           </KeyboardAvoidingView>
           <SignUp onPress={this.toSignUpScreen} />
         </ScrollView>

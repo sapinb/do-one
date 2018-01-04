@@ -55,6 +55,7 @@ class WalkthroughScreen extends React.Component {
       this._swiper.scrollBy(1)
     } else {
       // go to next page
+      this.props.navigation.navigate('MainDrawer')
     }
   }
 
