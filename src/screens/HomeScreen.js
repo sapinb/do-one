@@ -15,7 +15,7 @@ import { Constants } from 'expo'
 import { noop } from '../utils'
 import colors from '../constants/colors'
 
-const Header = ({ backgroundOpacity }) =>
+const Header = ({ backgroundOpacity, onPressMenu = noop }) =>
   <View style={{
     paddingTop: Constants.statusBarHeight,
     height: 56 + Constants.statusBarHeight,
@@ -23,7 +23,7 @@ const Header = ({ backgroundOpacity }) =>
     flexDirection: 'row',
   }}>
     <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: colors.black, opacity: backgroundOpacity }]} />
-    <TouchableOpacity style={{ height: 56, width: 56, alignItems: 'center', justifyContent: 'center' }}>
+    <TouchableOpacity onPress={onPressMenu} style={{ height: 56, width: 56, alignItems: 'center', justifyContent: 'center' }}>
       <Ionicons name='ios-menu-outline' style={{ fontSize: 40, color: colors.white }} />
     </TouchableOpacity>
     <View style={{ flex: 1 }} />
@@ -94,6 +94,8 @@ const FabPlus = ({ onPress = noop }) =>
 class HomeScreen extends React.Component {
   _animatedValue = new Animated.Value(0)
 
+  openMenu = () => this.props.navigation.navigate('DrawerOpen')
+
   render () {
     const backgroundOpacity = this._animatedValue.interpolate({
       inputRange: [0, 60, 160, 210],
@@ -119,7 +121,7 @@ class HomeScreen extends React.Component {
           contentContainerStyle={{ alignItems: 'center' }}
           showsVerticalScrollIndicator={false}
         >
-          <Header backgroundOpacity={backgroundOpacity} />
+          <Header backgroundOpacity={backgroundOpacity} onPressMenu={this.openMenu} />
           <View>
             <Text style={{ textAlign: 'center', fontSize: 32, color: colors.white }}>Good Morning</Text>
           </View>
