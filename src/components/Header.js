@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Animated,
   TouchableOpacity,
+  Image,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
@@ -58,4 +59,21 @@ export const AnimatedOpacityHeader = ({ backgroundOpacity, onPressMenu = noop, o
     <MenuIcon onPress={onPressMenu} />
     <View style={{ flex: 1 }} />
     <SearchIcon onPress={onPressSearch} />
+  </View>
+
+export const OverviewHeader = ({ onPressMenu = noop, onPressProfile = noop, profileImageSource, hasDot }) =>
+  <View style={{
+    paddingTop: Constants.statusBarHeight,
+    height: HEADER_HEIGHT + Constants.statusBarHeight,
+    width: '100%',
+    flexDirection: 'row',
+  }}>
+    <MenuIcon onPress={onPressMenu} />
+    <View style={{ flex: 1 }} />
+    <TouchableOpacity onPress={onPressProfile} style={styles.touchableContainer}>
+      <View>
+        <Image source={profileImageSource} style={{ width: 40, height: 40, borderRadius: 20 }} />
+        {hasDot && <View style={{ width: 4, height: 4, borderRadius: 2, backgroundColor: colors.radicalRed, position: 'absolute', top: 4, right: 4 }} />}
+      </View>
+    </TouchableOpacity>
   </View>
