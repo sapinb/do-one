@@ -7,8 +7,9 @@ import {
   StatusBar,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { ScreenOrientation } from 'expo'
 import Swiper from 'react-native-swiper'
+
+import { resetTo } from '../navigators/navigationActions'
 
 import { StatusBarSpacer } from '../components/StatusBarSpacer'
 import { LoginButton as NextButton } from '../components/LoginButton'
@@ -34,14 +35,6 @@ class WalkthroughScreen extends React.Component {
     swiperIndex: 0
   }
 
-  componentWillMount () {
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT)
-  }
-
-  componentWillUnmount () {
-    ScreenOrientation.allow(ScreenOrientation.Orientation.ALL_BUT_UPSIDE_DOWN)
-  }
-
   goBack = () => this.props.navigation.goBack()
 
   getSwiperRef = ref => { this._swiper = ref }
@@ -55,7 +48,8 @@ class WalkthroughScreen extends React.Component {
       this._swiper.scrollBy(1)
     } else {
       // go to next page
-      this.props.navigation.navigate('MainDrawer')
+      this.props.navigation.dispatch(resetTo({ routeName: 'MainDrawer' }))
+
     }
   }
 

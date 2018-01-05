@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { ScreenOrientation } from 'expo'
 
 import { resetTo } from '../navigators/navigationActions'
 import { StatusBarSpacer } from '../components/StatusBarSpacer'
@@ -79,14 +78,6 @@ const SignIn = ({ onPress = noop }) =>
   </View>
 
 class SignUpScreen extends React.Component {
-  componentWillMount () {
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT)
-  }
-
-  componentWillUnmount () {
-    ScreenOrientation.allow(ScreenOrientation.Orientation.ALL_BUT_UPSIDE_DOWN)
-  }
-
   goBack = () => this.props.navigation.goBack()
 
   toWalkthroughScreen = () => this.props.navigation.dispatch(resetTo({ routeName: 'WalkthroughScreen' }))

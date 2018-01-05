@@ -8,7 +8,9 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native'
-import { ScreenOrientation, Svg } from 'expo'
+import { Svg } from 'expo'
+
+import { resetTo } from '../navigators/navigationActions'
 
 import { StatusBarSpacer } from '../components/StatusBarSpacer'
 import { UsernameField, PasswordField } from '../components/LoginTextField'
@@ -71,17 +73,9 @@ const SignUp = ({ onPress = noop }) =>
   </View>
 
 class LoginScreen extends React.Component {
-  componentWillMount () {
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT)
-  }
-
-  componentWillUnmount () {
-    ScreenOrientation.allow(ScreenOrientation.Orientation.ALL_BUT_UPSIDE_DOWN)
-  }
-
   toSignUpScreen = () => this.props.navigation.navigate('SignUpScreen')
 
-  toHomeScreen = () => this.props.navigation.navigate('MainDrawer')
+  toHomeScreen = () => this.props.navigation.dispatch(resetTo({ routeName: 'MainDrawer' }))
 
   render () {
     return (
