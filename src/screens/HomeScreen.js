@@ -10,27 +10,11 @@ import {
 } from 'react-native'
 
 import { Ionicons } from '@expo/vector-icons'
-import { Constants } from 'expo'
 
+import { AnimatedOpacityHeader as Header } from '../components/Header'
+import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { noop } from '../utils'
 import colors from '../constants/colors'
-
-const Header = ({ backgroundOpacity, onPressMenu = noop }) =>
-  <View style={{
-    paddingTop: Constants.statusBarHeight,
-    height: 56 + Constants.statusBarHeight,
-    width: '100%',
-    flexDirection: 'row',
-  }}>
-    <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: colors.black, opacity: backgroundOpacity }]} />
-    <TouchableOpacity onPress={onPressMenu} style={{ height: 56, width: 56, alignItems: 'center', justifyContent: 'center' }}>
-      <Ionicons name='ios-menu-outline' style={{ fontSize: 40, color: colors.white }} />
-    </TouchableOpacity>
-    <View style={{ flex: 1 }} />
-    <TouchableOpacity style={{ height: 56, width: 56, alignItems: 'center', justifyContent: 'center' }}>
-      <Ionicons name='ios-search-outline' style={{ fontSize: 40, color: colors.white }} />
-    </TouchableOpacity>
-  </View>
 
 const TodoItem = ({ imageSource, title, time, active = false }) =>
   <View style={{ height: 80, width: '100%', flexDirection: 'row', borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#0008', backgroundColor: colors.white }}>
@@ -106,6 +90,7 @@ class HomeScreen extends React.Component {
         source={require('../images/login-bg.jpg')}
         style={{ flex: 1 }}
       >
+        <BackgroundOverlay opacity={0.25} />
         <Animated.ScrollView
           stickyHeaderIndices={[0]}
           onScroll={Animated.event([
