@@ -39,6 +39,8 @@ const TouchableHeaderIcon = ({ onPress, iconName }) =>
 const MenuIcon = withProps({ iconName: 'ios-menu-outline' })(TouchableHeaderIcon)
 const SearchIcon = withProps({ iconName: 'ios-search-outline' })(TouchableHeaderIcon)
 const ExitIcon = withProps({ iconName: 'ios-exit-outline' })(TouchableHeaderIcon)
+const BackIcon = withProps({ iconName: 'ios-arrow-round-back-outline' })(TouchableHeaderIcon)
+const ShareIcon = withProps({ iconName: 'ios-redo-outline' })(TouchableHeaderIcon)
 
 export const Header = ({ onPressMenu = noop, onPressSearch = noop, style }) =>
   <View style={[{
@@ -92,4 +94,18 @@ export const SettingsHeader = ({ onPressMenu = noop, onPressExit = noop, style }
     <MenuIcon onPress={onPressMenu} />
     <View style={{ flex: 1 }} />
     <ExitIcon onPress={onPressExit} />
+  </View>
+
+export const AnimatedListHeader = ({ backgroundOpacity, onPressBack = noop, onPressSearch = noop, onPressShare, style }) =>
+  <View style={[{
+    paddingTop: Constants.statusBarHeight,
+    height: HEADER_HEIGHT + Constants.statusBarHeight,
+    width: '100%',
+    flexDirection: 'row',
+  }, style]}>
+    <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: colors.black, opacity: backgroundOpacity }]} />
+    <BackIcon onPress={onPressBack} />
+    <View style={{ flex: 1 }} />
+    <ShareIcon onPress={onPressShare} />
+    <SearchIcon onPress={onPressSearch} />
   </View>
