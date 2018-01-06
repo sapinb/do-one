@@ -18,6 +18,7 @@ import { LoginButton as SignInButton } from '../components/LoginButton'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { noop } from '../utils'
 import colors from '../constants/colors'
+import backgrounds from '../images/backgrounds'
 
 const styles = StyleSheet.create({
   LogoContainer: {
@@ -80,7 +81,7 @@ class LoginScreen extends React.Component {
   render () {
     return (
       <ImageBackground
-        source={require('../images/login-bg.jpg')}
+        source={backgrounds.cliff()}
         style={{ flex: 1 }}
       >
         <BackgroundOverlay backgroundColor='#000' opacity={0.25} />

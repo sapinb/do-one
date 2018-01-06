@@ -10,8 +10,9 @@ import {
 import { Ionicons } from '@expo/vector-icons'
 
 import { OverviewHeader as Header } from '../components/Header'
-import colors from '../constants/colors'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
+import colors from '../constants/colors'
+import backgrounds from '../images/backgrounds'
 
 const MonthBar = () =>
   <View>
@@ -42,7 +43,7 @@ class OverviewScreen extends React.Component {
   render () {
     return (
       <ImageBackground
-        source={require('../images/bg-1.jpg')}
+        source={backgrounds.snowyTree()}
         style={{ flex: 1 }}
       >
         <BackgroundOverlay />

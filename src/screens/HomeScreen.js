@@ -15,6 +15,7 @@ import { AnimatedOpacityHeader as Header } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { noop } from '../utils'
 import colors from '../constants/colors'
+import backgrounds from '../images/backgrounds'
 
 const TodoItem = ({ imageSource, title, time, active = false }) =>
   <View style={{ height: 80, width: '100%', flexDirection: 'row', borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#0008', backgroundColor: colors.white }}>
@@ -87,7 +88,7 @@ class HomeScreen extends React.Component {
     })
     return (
       <ImageBackground
-        source={require('../images/login-bg.jpg')}
+        source={backgrounds.cliff()}
         style={{ flex: 1 }}
       >
         <BackgroundOverlay opacity={0.25} />
