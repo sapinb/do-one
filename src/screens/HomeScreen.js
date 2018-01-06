@@ -16,6 +16,7 @@ import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { noop } from '../utils'
 import colors from '../constants/colors'
 import backgrounds from '../images/backgrounds'
+import profilePics from '../images/profilePics'
 
 const TodoItem = ({ imageSource, title, time, active = false }) =>
   <View style={{ height: 80, width: '100%', flexDirection: 'row', borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#0008', backgroundColor: colors.white }}>
@@ -112,17 +113,17 @@ class HomeScreen extends React.Component {
             <Text style={{ textAlign: 'center', fontSize: 32, color: colors.white }}>Good Morning</Text>
           </View>
           <View style={{ marginVertical: 30 }}>
-            <Image source={require('../images/profile/me.jpg')} style={{ width: 128, height: 128, borderRadius: 64 }} />
+            <Image source={profilePics.me()} style={{ width: 128, height: 128, borderRadius: 64 }} />
             <Text style={{ width: 30, height: 30, color: '#fff', backgroundColor: colors.viking, fontSize: 20, borderRadius: 15, position: 'absolute', top: 5, right: 5, textAlign: 'center' }}>3</Text>
           </View>
           <CalendarMonth />
           <CalendarWeek />
           <View>
-            <TodoItem title='New Subpage for Janet' time='8 - 10am' imageSource={require('../images/profile/1.jpg')} active />
-            <TodoItem title='Catch up with Tom' time='11 - 12pm  Hangouts' imageSource={require('../images/profile/2.jpg')} />
-            <TodoItem title='Lunch with Diane' time='1pm  Restaurant' imageSource={require('../images/profile/3.jpg')} />
-            <TodoItem title='Lunch' time='10:00' imageSource={require('../images/profile/4.jpg')} />
-            <TodoItem title='Lunch' time='10:00' imageSource={require('../images/profile/5.jpg')} />
+            <TodoItem title='New Subpage for Janet' time='8 - 10am' imageSource={profilePics.friend1()} active />
+            <TodoItem title='Catch up with Tom' time='11 - 12pm  Hangouts' imageSource={profilePics.friend2()} />
+            <TodoItem title='Lunch with Diane' time='1pm  Restaurant' imageSource={profilePics.friend3()} />
+            <TodoItem title='Lunch' time='10:00' imageSource={profilePics.friend4()} />
+            <TodoItem title='Lunch' time='10:00' imageSource={profilePics.friend5()} />
           </View>
         </Animated.ScrollView>
         <FabPlus onPress={() => {}} />

@@ -15,6 +15,7 @@ import { BackgroundOverlay } from '../components/BackgroundOverlay'
 
 import { noop } from '../utils'
 import colors from '../constants/colors'
+import profilePics from '../images/profilePics'
 
 const styles = StyleSheet.create({
   settingItemContainer: {
@@ -66,7 +67,7 @@ class SettingsScreen extends React.Component {
     const { sound, notification } = this.state
     return (
       <View style={{ flex: 1 }}>
-        <Image source={require('../images/profile/me-banner.jpg')} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
+        <Image source={profilePics.myBanner()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
         <BackgroundOverlay />
         <ScrollView
           stickyHeaderIndices={[0]}

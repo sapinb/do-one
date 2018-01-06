@@ -13,6 +13,7 @@ import { OverviewHeader as Header } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import colors from '../constants/colors'
 import backgrounds from '../images/backgrounds'
+import profilePics from '../images/profilePics'
 
 const MonthBar = () =>
   <View>
@@ -47,7 +48,7 @@ class OverviewScreen extends React.Component {
         style={{ flex: 1 }}
       >
         <BackgroundOverlay />
-        <Header profileImageSource={require('../images/profile/me.jpg')} hasDot onPressMenu={this.openMenu} />
+        <Header profileImageSource={profilePics.me()} hasDot onPressMenu={this.openMenu} />
         <MonthBar />
         <CircularGraphs />
         <Text style={{ color: colors.white, textAlign: 'center', marginBottom: 10 }}>
