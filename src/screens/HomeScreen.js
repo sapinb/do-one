@@ -82,6 +82,8 @@ class HomeScreen extends React.Component {
 
   openMenu = () => this.props.navigation.navigate('DrawerOpen')
 
+  toCreateScreen = () => this.props.navigation.navigate('CreateScreen')
+
   render () {
     const backgroundOpacity = this._animatedValue.interpolate({
       inputRange: [0, 60, 160, 210],
@@ -125,7 +127,7 @@ class HomeScreen extends React.Component {
             <TodoItem title='Lunch' time='10:00' imageSource={profilePics.friend5()} />
           </View>
         </Animated.ScrollView>
-        <FabPlus onPress={() => {}} />
+        <FabPlus onPress={this.toCreateScreen} />
       </ImageBackground>
     )
   }
