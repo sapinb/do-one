@@ -13,6 +13,8 @@ import { Ionicons } from '@expo/vector-icons'
 
 import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
+import { PlusButton } from '../components/PlusButton'
+
 import { noop } from '../utils'
 import colors from '../constants/colors'
 import backgrounds from '../images/backgrounds'
@@ -73,9 +75,7 @@ const CalendarWeek = () =>
   </View>
 
 const FabPlus = ({ onPress = noop }) =>
-  <TouchableOpacity onPress={onPress} style={{ position: 'absolute', bottom: 20, right: 20 }}>
-    <Ionicons name='ios-add-circle' style={{ color: colors.radicalRed, fontSize: 64 }} />
-  </TouchableOpacity>
+  <PlusButton onPress={onPress} style={{ position: 'absolute', bottom: 20, right: 20 }} />
 
 class HomeScreen extends React.Component {
   _animatedValue = new Animated.Value(0)
