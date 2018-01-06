@@ -14,28 +14,102 @@ import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import colors from '../constants/colors'
 import backgrounds from '../images/backgrounds'
 import profilePics from '../images/profilePics'
+import { noop } from '../utils/index'
+
+const styles = StyleSheet.create({
+  commentText: {
+    color: colors.white,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+
+  graphButtonBg: {
+    width: '100%',
+    height: 28,
+    marginTop: 28,
+    backgroundColor: colors.white,
+  },
+  graphButton: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: colors.radicalRed,
+    alignSelf: 'center',
+    position: 'absolute',
+    top: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+  },
+  graphButtonIcon: {
+    color: colors.white,
+    fontSize: 32,
+  },
+
+  monthBarUpperContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  monthBarChevron: {
+    fontSize: 20,
+    color: colors.white50,
+    paddingHorizontal: 20,
+  },
+  monthBarUpperText: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: 32,
+    color: colors.white,
+  },
+  monthBarLowerText: {
+    textAlign: 'center',
+    fontSize: 12,
+    color: colors.white50,
+  },
+
+  taskStatItem: {
+    flexDirection: 'row',
+    height: 60,
+    width: '100%',
+    backgroundColor: colors.white,
+    alignItems: 'center',
+    borderBottomColor: '#0004',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  taskStatItemIndicator: {
+    width: 10,
+    height: 10,
+    margin: 15,
+  },
+  taskStatItemTitle: {
+    flex: 1,
+  },
+  taskStatItemCount: {
+    margin: 15
+  }
+})
 
 const MonthBar = () =>
   <View>
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <View style={styles.monthBarUpperContainer}>
       <TouchableOpacity>
-        <Ionicons name='ios-arrow-back' style={{ fontSize: 20, color: colors.white50, paddingHorizontal: 20 }} />
+        <Ionicons name='ios-arrow-back' style={styles.monthBarChevron} />
       </TouchableOpacity>
-      <Text style={{ flex: 1, textAlign: 'center', fontSize: 32, color: colors.white }}>February</Text>
+      <Text style={styles.monthBarUpperText}>February</Text>
       <TouchableOpacity>
-        <Ionicons name='ios-arrow-forward' style={{ fontSize: 16, color: colors.white50, paddingHorizontal: 20 }} />
+        <Ionicons name='ios-arrow-forward' style={styles.monthBarChevron} />
       </TouchableOpacity>
     </View>
-    <Text style={{ textAlign: 'center', fontSize: 12, color: colors.white50 }}>2015</Text>
+    <Text style={styles.monthBarLowerText}>2015</Text>
   </View>
 
 const CircularGraphs = () => <View style={{ flex: 1 }} />
 
 const TaskStatItem = ({ color, title, count }) =>
-  <View style={{ flexDirection: 'row', height: 60, width: '100%', backgroundColor: colors.white, alignItems: 'center', borderBottomColor: '#0004', borderBottomWidth: StyleSheet.hairlineWidth }}>
-    <View style={{ width: 10, height: 10, backgroundColor: color, margin: 15 }} />
-    <Text style={{ flex: 1 }}>{title}</Text>
-    <Text style={{ margin: 15 }}>{count}</Text>
+  <View style={styles.taskStatItem}>
+    <View style={[styles.taskStatItemIndicator, { backgroundColor: color }]} />
+    <Text style={styles.taskStatItemTitle}>{title}</Text>
+    <Text style={styles.taskStatItemCount}>{count}</Text>
   </View>
 
 class OverviewScreen extends React.Component {
@@ -51,12 +125,14 @@ class OverviewScreen extends React.Component {
         <Header profileImageSource={profilePics.me()} hasDot onPressMenu={this.openMenu} />
         <MonthBar />
         <CircularGraphs />
-        <Text style={{ color: colors.white, textAlign: 'center', marginBottom: 10 }}>
+        <Text style={styles.commentText}>
           Good job, you've completed 6%{'\n'}more tasks this month.
         </Text>
         <View>
-          <View style={{ width: '100%', height: 25, marginTop: 25, backgroundColor: colors.white }} />
-          <View style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: colors.radicalRed, alignSelf: 'center', position: 'absolute', top: 0 }} />
+          <View style={styles.graphButtonBg} />
+          <TouchableOpacity style={styles.graphButton} onPress={noop}>
+            <Ionicons name='ios-stats-outline' style={styles.graphButtonIcon} />
+          </TouchableOpacity>
         </View>
         <TaskStatItem color={colors.viking} title='Completed' count='108' />
         <TaskStatItem color={colors.texasRose} title='Snoozed' count='56' />
