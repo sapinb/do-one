@@ -38,7 +38,7 @@ const TouchableHeaderIcon = ({ onPress, iconName }) =>
 
 const MenuIcon = withProps({ iconName: 'ios-menu-outline' })(TouchableHeaderIcon)
 const SearchIcon = withProps({ iconName: 'ios-search-outline' })(TouchableHeaderIcon)
-const ExitIcon = withProps({ iconName: 'ios-exit-outline' })(TouchableHeaderIcon)
+const LogOutIcon = withProps({ iconName: 'ios-log-out-outline' })(TouchableHeaderIcon)
 const BackIcon = withProps({ iconName: 'ios-arrow-round-back-outline' })(TouchableHeaderIcon)
 const ShareIcon = withProps({ iconName: 'ios-redo-outline' })(TouchableHeaderIcon)
 
@@ -84,7 +84,7 @@ export const OverviewHeader = ({ onPressMenu = noop, onPressProfile = noop, prof
     </TouchableOpacity>
   </View>
 
-export const SettingsHeader = ({ onPressMenu = noop, onPressExit = noop, style }) =>
+export const SettingsHeader = ({ onPressMenu = noop, onPressLogout = noop, style }) =>
   <View style={[{
     paddingTop: Constants.statusBarHeight,
     height: HEADER_HEIGHT + Constants.statusBarHeight,
@@ -93,7 +93,7 @@ export const SettingsHeader = ({ onPressMenu = noop, onPressExit = noop, style }
   }, style]}>
     <MenuIcon onPress={onPressMenu} />
     <View style={{ flex: 1 }} />
-    <ExitIcon onPress={onPressExit} />
+    <LogOutIcon onPress={onPressLogout} />
   </View>
 
 export const AnimatedListHeader = ({ backgroundOpacity, onPressBack = noop, onPressSearch = noop, onPressShare, style }) =>

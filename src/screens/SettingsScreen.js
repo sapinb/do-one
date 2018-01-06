@@ -7,10 +7,12 @@ import {
   StyleSheet,
   TouchableHighlight,
   Switch,
+  Alert,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
-import { SettingsHeader as Header } from '../components/Header'
+import { resetTo } from '../navigators/navigationActions'
+import { SettingsHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 
 import { noop } from '../utils'
@@ -63,17 +65,32 @@ class SettingsScreen extends React.Component {
 
   openMenu = () => this.props.navigation.navigate('DrawerOpen')
 
+  logOut = () => {
+    Alert.alert(
+      'Log Out',
+      'Are you sure you want to log out?',
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'Log Out', onPress: () => this.props.navigation.dispatch(resetTo({ routeName: 'LoginScreen' }))}
+      ]
+    )
+  }
+
   render () {
     const { sound, notification } = this.state
     return (
       <View style={{ flex: 1 }}>
         <Image source={profilePics.myBanner()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
         <BackgroundOverlay />
+        <Header
+          onPressMenu={this.openMenu}
+          onPressLogout={this.logOut}
+          style={{ position: 'absolute', top: 0, zIndex: 1 }}
+        />
         <ScrollView
-          stickyHeaderIndices={[0]}
           style={{ flex: 1 }}
+          contentContainerStyle={{ paddingTop: HEADER_STATUSBAR_HEIGHT }}
         >
-          <Header onPressMenu={this.openMenu} />
           <View style={{ height: 160, justifyContent: 'flex-end' }}>
             <Text style={{ color: colors.white, fontSize: 36, padding: 20 }}>Nicole James</Text>
           </View>
@@ -83,7 +100,7 @@ class SettingsScreen extends React.Component {
           <SettingItem title='Theme' value='Standard' />
           <SettingItem title='Support' />
           <SettingItem title='Privacy' />
-          <SettingItem title='Logout' />
+          <SettingItem title='Logout' onPress={this.logOut} />
         </ScrollView>
       </View>
     )
