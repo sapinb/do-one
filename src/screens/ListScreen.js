@@ -12,6 +12,7 @@ import { get } from 'lodash'
 
 import { AnimatedListHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
+import { PlusButton, PLUS_BUTTON_HALF_HEIGHT } from '../components/PlusButton'
 
 import { noop } from '../utils'
 
@@ -103,6 +104,12 @@ class ListScreen extends React.Component {
           <View style={{ height: 120, paddingTop: 20, paddingHorizontal: 20 }}>
             <Text style={{ color: colors.white, fontSize: 32 }}>{groupName}</Text>
           </View>
+          <PlusButton style={{
+            position: 'absolute',
+            top: HEADER_STATUSBAR_HEIGHT + 120 - PLUS_BUTTON_HALF_HEIGHT,
+            right: 20,
+            zIndex: 1
+          }} />
           <View style={{ backgroundColor: colors.white }}>
             {items.map((item, idx) => <ListItem key={idx} {...item} onPress={this.toggleDone(idx)} />)}
           </View>
