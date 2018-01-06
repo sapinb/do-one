@@ -35,6 +35,7 @@ const TouchableHeaderIcon = ({ onPress, iconName }) =>
 
 const MenuIcon = withProps({ iconName: 'ios-menu-outline' })(TouchableHeaderIcon)
 const SearchIcon = withProps({ iconName: 'ios-search-outline' })(TouchableHeaderIcon)
+const ExitIcon = withProps({ iconName: 'ios-exit-outline' })(TouchableHeaderIcon)
 
 export const Header = ({ onPressMenu = noop, onPressSearch = noop }) =>
   <View style={{
@@ -76,4 +77,16 @@ export const OverviewHeader = ({ onPressMenu = noop, onPressProfile = noop, prof
         {hasDot && <View style={{ width: 4, height: 4, borderRadius: 2, backgroundColor: colors.radicalRed, position: 'absolute', top: 4, right: 4 }} />}
       </View>
     </TouchableOpacity>
+  </View>
+
+export const SettingsHeader = ({ onPressMenu = noop, onPressExit = noop }) =>
+  <View style={{
+    paddingTop: Constants.statusBarHeight,
+    height: HEADER_HEIGHT + Constants.statusBarHeight,
+    width: '100%',
+    flexDirection: 'row',
+  }}>
+    <MenuIcon onPress={onPressMenu} />
+    <View style={{ flex: 1 }} />
+    <ExitIcon onPress={onPressExit} />
   </View>
