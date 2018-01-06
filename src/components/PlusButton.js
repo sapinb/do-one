@@ -9,16 +9,17 @@ export const PlusButton = ({ onPress = noop, style }) =>
   <TouchableOpacity
     onPress={onPress}
     style={[{
-      width: 60,
-      height: 60,
-      borderRadius: 30,
+      width: 56,
+      height: 56,
+      borderRadius: 28,
       backgroundColor: colors.radicalRed,
       alignItems: 'center',
       justifyContent: 'center',
+      elevation: 4,
     }, style]}
   >
-    <Ionicons name='ios-add' style={{ color: colors.white, fontSize: 64 }} />
+    <Ionicons name='ios-add' style={{ color: colors.white, fontSize: 48 }} />
   </TouchableOpacity>
 
-export const PLUS_BUTTON_HEIGHT = 60
+export const PLUS_BUTTON_HEIGHT = 56
 export const PLUS_BUTTON_HALF_HEIGHT = PLUS_BUTTON_HEIGHT / 2
