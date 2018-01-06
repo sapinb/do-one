@@ -11,7 +11,7 @@ import {
 
 import { Ionicons } from '@expo/vector-icons'
 
-import { AnimatedOpacityHeader as Header } from '../components/Header'
+import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { noop } from '../utils'
 import colors from '../constants/colors'
@@ -93,8 +93,8 @@ class HomeScreen extends React.Component {
         style={{ flex: 1 }}
       >
         <BackgroundOverlay opacity={0.25} />
+        <Header backgroundOpacity={backgroundOpacity} onPressMenu={this.openMenu} style={{ position: 'absolute', top: 0, zIndex: 1 }} />
         <Animated.ScrollView
-          stickyHeaderIndices={[0]}
           onScroll={Animated.event([
             {
               nativeEvent: {
@@ -105,10 +105,9 @@ class HomeScreen extends React.Component {
             }
           ], { useNativeDriver: true })}
           style={{ flex: 1 }}
-          contentContainerStyle={{ alignItems: 'center' }}
+          contentContainerStyle={{ alignItems: 'center', paddingTop: HEADER_STATUSBAR_HEIGHT }}
           showsVerticalScrollIndicator={false}
         >
-          <Header backgroundOpacity={backgroundOpacity} onPressMenu={this.openMenu} />
           <View>
             <Text style={{ textAlign: 'center', fontSize: 32, color: colors.white }}>Good Morning</Text>
           </View>
