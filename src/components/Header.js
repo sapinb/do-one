@@ -13,7 +13,10 @@ import { withProps } from 'recompose'
 import { noop } from '../utils'
 import colors from '../constants/colors'
 
-const HEADER_HEIGHT = 56
+export const HEADER_HEIGHT = 56
+
+// height of header + status bar === amount of paddingTop needed
+export const HEADER_STATUSBAR_HEIGHT = HEADER_HEIGHT + Constants.statusBarHeight
 
 const styles = StyleSheet.create({
   touchableContainer: {
@@ -37,38 +40,38 @@ const MenuIcon = withProps({ iconName: 'ios-menu-outline' })(TouchableHeaderIcon
 const SearchIcon = withProps({ iconName: 'ios-search-outline' })(TouchableHeaderIcon)
 const ExitIcon = withProps({ iconName: 'ios-exit-outline' })(TouchableHeaderIcon)
 
-export const Header = ({ onPressMenu = noop, onPressSearch = noop }) =>
-  <View style={{
+export const Header = ({ onPressMenu = noop, onPressSearch = noop, style }) =>
+  <View style={[{
     paddingTop: Constants.statusBarHeight,
     height: HEADER_HEIGHT + Constants.statusBarHeight,
     width: '100%',
     flexDirection: 'row',
-  }}>
+  }, style]}>
     <MenuIcon onPress={onPressMenu} />
     <View style={{ flex: 1 }} />
     <SearchIcon onPress={onPressSearch} />
   </View>
 
-export const AnimatedOpacityHeader = ({ backgroundOpacity, onPressMenu = noop, onPressSearch = noop }) =>
-  <View style={{
+export const AnimatedOpacityHeader = ({ backgroundOpacity, onPressMenu = noop, onPressSearch = noop, style }) =>
+  <View style={[{
     paddingTop: Constants.statusBarHeight,
     height: HEADER_HEIGHT + Constants.statusBarHeight,
     width: '100%',
     flexDirection: 'row',
-  }}>
+  }, style]}>
     <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: colors.black, opacity: backgroundOpacity }]} />
     <MenuIcon onPress={onPressMenu} />
     <View style={{ flex: 1 }} />
     <SearchIcon onPress={onPressSearch} />
   </View>
 
-export const OverviewHeader = ({ onPressMenu = noop, onPressProfile = noop, profileImageSource, hasDot }) =>
-  <View style={{
+export const OverviewHeader = ({ onPressMenu = noop, onPressProfile = noop, profileImageSource, hasDot, style }) =>
+  <View style={[{
     paddingTop: Constants.statusBarHeight,
     height: HEADER_HEIGHT + Constants.statusBarHeight,
     width: '100%',
     flexDirection: 'row',
-  }}>
+  }, style]}>
     <MenuIcon onPress={onPressMenu} />
     <View style={{ flex: 1 }} />
     <TouchableOpacity onPress={onPressProfile} style={styles.touchableContainer}>
@@ -79,13 +82,13 @@ export const OverviewHeader = ({ onPressMenu = noop, onPressProfile = noop, prof
     </TouchableOpacity>
   </View>
 
-export const SettingsHeader = ({ onPressMenu = noop, onPressExit = noop }) =>
-  <View style={{
+export const SettingsHeader = ({ onPressMenu = noop, onPressExit = noop, style }) =>
+  <View style={[{
     paddingTop: Constants.statusBarHeight,
     height: HEADER_HEIGHT + Constants.statusBarHeight,
     width: '100%',
     flexDirection: 'row',
-  }}>
+  }, style]}>
     <MenuIcon onPress={onPressMenu} />
     <View style={{ flex: 1 }} />
     <ExitIcon onPress={onPressExit} />
