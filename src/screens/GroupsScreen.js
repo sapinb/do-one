@@ -40,10 +40,21 @@ const GroupItem = ({ title, count = 0, color = 'black', onPress = noop }) =>
     </View>
   </TouchableHighlight>
 
+const groups = [
+  { title: 'Shop', count: 25, color: colors.viking },
+  { title: 'Work', count: 12, color: colors.heliotrope },
+  { title: 'Health', count: 3, color: colors.heliotrope },
+  { title: 'Travel', count: 8, color: colors.texasRose },
+  { title: 'Bills', count: 16, color: colors.radicalRed50 },
+  { title: 'Auto', count: 14, color: colors.radicalRed50 },
+]
+
 class GroupsScreen extends React.Component {
   _animatedValue = new Animated.Value(0)
 
   openMenu = () => this.props.navigation.navigate('DrawerOpen')
+
+  toListScreen = (groupName) => () => this.props.navigation.navigate('ListScreen', { groupName })
 
   render () {
     const backgroundOpacity = this._animatedValue.interpolate({
@@ -76,12 +87,7 @@ class GroupsScreen extends React.Component {
             <Text style={{ color: colors.white, fontSize: 32 }}>My Groups</Text>
           </View>
           <View style={{ flexDirection: 'row', width: '100%', flexWrap: 'wrap', backgroundColor: colors.white }}>
-            <GroupItem title='Shop' count={25} color={colors.viking} />
-            <GroupItem title='Work' count={12} color={colors.heliotrope} />
-            <GroupItem title='Health' count={3} color={colors.heliotrope} />
-            <GroupItem title='Travel' count={8} color={colors.texasRose} />
-            <GroupItem title='Bills' count={16} color={colors.radicalRed50} />
-            <GroupItem title='Auto' count={14} color={colors.radicalRed} />
+            {groups.map((group, idx) => <GroupItem key={idx} {...group} onPress={this.toListScreen(group.title)} />)}
           </View>
         </Animated.ScrollView>
       </View>
