@@ -81,7 +81,7 @@ class ListScreen extends React.Component {
     })
     return (
       <View style={{ flex: 1 }}>
-        <Image source={backgrounds.cloth()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
+        <Image source={backgrounds.sandwich()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
         <BackgroundOverlay />
         <Header
           style={{ position: 'absolute', top: 0, zIndex: 1 }}
