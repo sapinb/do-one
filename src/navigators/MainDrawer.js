@@ -5,6 +5,7 @@ import OverviewScreen from '../screens/OverviewScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import GroupsScreen from '../screens/GroupsScreen'
 import ProfileScreen from '../screens/ProfileScreen'
+import TimelineScreen from '../screens/TimelineScreen'
 
 const MainDrawer = DrawerNavigator({
   HomeScreen: { screen: HomeScreen },
@@ -12,8 +13,9 @@ const MainDrawer = DrawerNavigator({
   SettingsScreen: { screen: SettingsScreen },
   GroupsScreen: { screen: GroupsScreen },
   ProfileScreen: { screen: ProfileScreen },
+  TimelineScreen: { screen: TimelineScreen },
 }, {
-  initialRouteName: 'ProfileScreen',
+  initialRouteName: 'HomeScreen',
   // https://github.com/react-navigation/react-navigation/issues/3148
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',
