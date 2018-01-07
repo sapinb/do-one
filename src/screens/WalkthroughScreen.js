@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   Dimensions,
   StatusBar,
@@ -11,6 +10,7 @@ import Swiper from 'react-native-swiper'
 
 import { resetTo } from '../navigators/navigationActions'
 
+import { StyledText as Text } from '../components/StyledText'
 import { StatusBarSpacer } from '../components/StatusBarSpacer'
 import { LoginButton as NextButton } from '../components/LoginButton'
 import colors from '../constants/colors'

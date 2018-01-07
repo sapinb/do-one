@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   TextInput,
@@ -13,6 +12,7 @@ import {
 } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 
+import { StyledText as Text } from '../components/StyledText'
 import { AnimatedCreateHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { PlusButton, PLUS_BUTTON_HALF_HEIGHT } from '../components/PlusButton'

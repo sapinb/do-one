@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   ImageBackground,
@@ -11,6 +10,7 @@ import {
 
 import { Ionicons } from '@expo/vector-icons'
 
+import { StyledText as Text } from '../components/StyledText'
 import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { PlusButton } from '../components/PlusButton'
@@ -28,7 +28,7 @@ const TodoItem = ({ imageSource, title, time, active = false }) =>
     </View>
     <View style={{ flex: 1, justifyContent: 'center' }}>
       <Text>{title}</Text>
-      <Text style={{ color: '#0008' }}>{time}</Text>
+      <Text light style={{ color: colors.gray50 }}>{time}</Text>
     </View>
   </View>
 
@@ -45,7 +45,7 @@ const CalendarMonth = () =>
 
 const CalenderDay = ({ day, date, active, hasDot }) =>
   <View style={{ flex: 1, alignItems: 'center' }}>
-    <Text style={{ color: '#0008', marginBottom: 5 }}>{day}</Text>
+    <Text light style={{ color: '#0008', marginBottom: 5 }}>{day}</Text>
     <View style={[{ width: 36, height: 36, alignItems: 'center', justifyContent: 'center' }, active && { borderRadius: 18, backgroundColor: '#0002' }]}>
       <Text>{date}</Text>
       {hasDot &&

@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   ImageBackground,
   StyleSheet,
   TouchableOpacity,
@@ -9,6 +8,7 @@ import {
 
 import { Ionicons } from '@expo/vector-icons'
 
+import { StyledText as Text } from '../components/StyledText'
 import { OverviewHeader as Header } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import colors from '../constants/colors'

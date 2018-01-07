@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     color: colors.white,
+    fontFamily: 'muli-regular'
   },
 })
 

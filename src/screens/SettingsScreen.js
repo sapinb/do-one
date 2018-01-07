@@ -2,7 +2,6 @@ import React from 'react'
 import {
   View,
   ScrollView,
-  Text,
   Image,
   StyleSheet,
   TouchableHighlight,
@@ -11,6 +10,7 @@ import {
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
+import { StyledText as Text } from '../components/StyledText'
 import { resetTo } from '../navigators/navigationActions'
 import { SettingsHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'

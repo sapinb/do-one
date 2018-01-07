@@ -1,14 +1,13 @@
 import React from 'react'
 import {
   View,
-  Text,
   Image,
-  ScrollView,
   StyleSheet,
   TouchableHighlight,
   Animated,
 } from 'react-native'
 
+import { StyledText as Text } from '../components/StyledText'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 
@@ -35,7 +34,7 @@ const GroupItem = ({ title, count = 0, color = 'black', onPress = noop }) =>
       alignItems: 'center',
     }}>
       <Text style={{ fontSize: 24 }}>{title}</Text>
-      <Text style={{ color: colors.gray50, marginVertical: 10 }}>{count} ITEMS</Text>
+      <Text light style={{ color: colors.gray50, marginVertical: 10 }}>{count} ITEMS</Text>
       <View style={{ width: 20, height: 3, backgroundColor: color }} />
     </View>
   </TouchableHighlight>

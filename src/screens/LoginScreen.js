@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -12,6 +11,7 @@ import { Svg } from 'expo'
 
 import { resetTo } from '../navigators/navigationActions'
 
+import { StyledText as Text } from '../components/StyledText'
 import { StatusBarSpacer } from '../components/StatusBarSpacer'
 import { UsernameField, PasswordField } from '../components/LoginTextField'
 import { LoginButton as SignInButton } from '../components/LoginButton'

@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -11,6 +10,7 @@ import {
 import { Ionicons } from '@expo/vector-icons'
 
 import { resetTo } from '../navigators/navigationActions'
+import { StyledText as Text } from '../components/StyledText'
 import { StatusBarSpacer } from '../components/StatusBarSpacer'
 import { UsernameField, PasswordField, NameField, EmailField } from '../components/LoginTextField'
 import { LoginButton as SignUpButton } from '../components/LoginButton'

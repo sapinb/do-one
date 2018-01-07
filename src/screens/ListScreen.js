@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   TouchableHighlight,
@@ -10,6 +9,7 @@ import {
 import { Ionicons } from '@expo/vector-icons'
 import { get } from 'lodash'
 
+import { StyledText as Text } from '../components/StyledText'
 import { AnimatedListHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { PlusButton, PLUS_BUTTON_HALF_HEIGHT } from '../components/PlusButton'

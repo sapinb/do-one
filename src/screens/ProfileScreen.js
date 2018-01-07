@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   Image,
@@ -9,6 +8,7 @@ import {
 
 import { Ionicons } from '@expo/vector-icons'
 
+import { StyledText as Text } from '../components/StyledText'
 import { Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { PLUS_BUTTON_HEIGHT, PLUS_BUTTON_HALF_HEIGHT } from '../components/PlusButton'
@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
 const MonthSelector = ({ month, year, onPressDown = noop }) =>
   <View style={{ flexDirection: 'row', height: 50, alignItems: 'center', paddingHorizontal: 20 }}>
     <Text style={{ color: colors.black }}>{month}</Text>
-    <Text style={{ color: colors.gray50, paddingLeft: 5 }}>{year}</Text>
+    <Text light style={{ color: colors.gray50, paddingLeft: 5 }}>{year}</Text>
     <TouchableOpacity onPress={onPressDown} style={{ width: 40, height: 40, alignItems: 'center', justifyContent: 'center' }}>
-      <Ionicons name='ios-arrow-down' style={{ fontSize: 20, color: colors.gray50 }} />
+      <Ionicons name='ios-arrow-down' style={{ fontSize: 20, color: colors.gray25 }} />
     </TouchableOpacity>
   </View>
 
