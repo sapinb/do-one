@@ -12,11 +12,13 @@ const RootNavigator = StackNavigator({
   LoginScreen: { screen: LoginScreen },
   SignUpScreen: { screen: SignUpScreen },
   WalkthroughScreen: { screen: WalkthroughScreen },
+
   MainDrawer: { screen: MainDrawer },
+
   ListScreen: { screen: ListScreen },
   CreateScreen: { screen: CreateScreen },
 }, {
-  initialRouteName: 'LoginScreen',
+  initialRouteName: 'MainDrawer',
   headerMode: 'none'
 })
 
