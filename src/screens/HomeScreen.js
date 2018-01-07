@@ -14,23 +14,12 @@ import { StyledText as Text } from '../components/StyledText'
 import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { PlusButton } from '../components/PlusButton'
+import { TodoItem } from '../components/TodoItem'
 
 import { noop } from '../utils'
 import colors from '../constants/colors'
 import backgrounds from '../images/backgrounds'
 import profilePics from '../images/profilePics'
-
-const TodoItem = ({ imageSource, title, time, active = false }) =>
-  <View style={{ height: 80, width: '100%', flexDirection: 'row', borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#0008', backgroundColor: colors.white }}>
-    <View style={{ height: '100%', width: 5, backgroundColor: active ? colors.viking : '#0008' }} />
-    <View style={{ width: 80, height: 80, alignItems: 'center', justifyContent: 'center' }}>
-      <Image source={imageSource} style={{ width: 60, height: 60, borderRadius: 30 }} />
-    </View>
-    <View style={{ flex: 1, justifyContent: 'center' }}>
-      <Text>{title}</Text>
-      <Text light style={{ color: colors.gray50 }}>{time}</Text>
-    </View>
-  </View>
 
 const CalendarMonth = () =>
   <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
@@ -120,7 +109,7 @@ class HomeScreen extends React.Component {
           <CalendarMonth />
           <CalendarWeek />
           <View>
-            <TodoItem title='New Subpage for Janet' time='8 - 10am' imageSource={profilePics.friend1()} active />
+            <TodoItem title='New Subpage for Janet' time='8 - 10am' imageSource={profilePics.friend1()} completed />
             <TodoItem title='Catch up with Tom' time='11 - 12pm  Hangouts' imageSource={profilePics.friend2()} />
             <TodoItem title='Lunch with Diane' time='1pm  Restaurant' imageSource={profilePics.friend3()} />
             <TodoItem title='Lunch' time='10:00' imageSource={profilePics.friend4()} />
