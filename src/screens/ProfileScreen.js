@@ -149,7 +149,7 @@ class ProfileScreen extends React.Component {
       <View style={{ flex: 1 }}>
         <Image source={profilePics.myBanner()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
         <BackgroundOverlay />
-        <Header onPressClose={this.goBack} />
+        <Header onPressMenu={this.openMenu} />
         <View style={{ height: 120, justifyContent: 'flex-end' }}>
           <Text style={{ color: colors.white, fontSize: 36, padding: 20 }}>Nicole James</Text>
         </View>
