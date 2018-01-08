@@ -19,7 +19,8 @@ const RootNavigator = StackNavigator({
   CreateScreen: { screen: CreateScreen },
 }, {
   initialRouteName: 'LoginScreen',
-  headerMode: 'none'
+  headerMode: 'none',
+  mode: 'modal'
 })
 
 export { RootNavigator }
