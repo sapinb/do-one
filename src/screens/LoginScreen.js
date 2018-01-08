@@ -34,9 +34,11 @@ const styles = StyleSheet.create({
   },
   SignUpText: {
     color: colors.white50,
+    backgroundColor: 'transparent',
   },
   SignUpTextTouchable: {
     color: colors.white,
+    backgroundColor: 'transparent',
   },
   ForgotPasswordContainer: {
     height: 60,
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
   },
   ForgotPasswordText: {
     color: colors.white50,
+    backgroundColor: 'transparent',
   },
 })
 

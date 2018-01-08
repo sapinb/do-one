@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 40,
     color: colors.white,
+    backgroundColor: 'transparent',
   }
 })
 

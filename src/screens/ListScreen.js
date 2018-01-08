@@ -102,7 +102,7 @@ class ListScreen extends React.Component {
           ], { useNativeDriver: true })}
         >
           <View style={{ height: 120, paddingTop: 20, paddingHorizontal: 20 }}>
-            <Text style={{ color: colors.white, fontSize: 32 }}>{groupName}</Text>
+            <Text style={{ color: colors.white, fontSize: 32, backgroundColor: 'transparent' }}>{groupName}</Text>
           </View>
           <PlusButton style={{
             position: 'absolute',

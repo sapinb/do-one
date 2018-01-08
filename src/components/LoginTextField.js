@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     paddingLeft: 25,
     paddingRight: 15,
+    backgroundColor: 'transparent',
   },
   textInput: {
     flex: 1,
@@ -34,6 +35,7 @@ const LoginTextField = ({ iconName = 'user-o', style, ...props }) =>
       {...props}
       style={[style, styles.textInput]}
       underlineColorAndroid='transparent'
+      placeholderTextColor={colors.white}
     />
   </View>
 

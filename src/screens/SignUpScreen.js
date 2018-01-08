@@ -20,11 +20,6 @@ import colors from '../constants/colors'
 import backgrounds from '../images/backgrounds'
 
 const styles = StyleSheet.create({
-  LogoContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   SignInContainer: {
     height: 60,
     flexDirection: 'row',
@@ -33,17 +28,11 @@ const styles = StyleSheet.create({
   },
   SignInText: {
     color: colors.white50,
+    backgroundColor: 'transparent',
   },
   SignInTextTouchable: {
     color: colors.white,
-  },
-  ForgotPasswordContainer: {
-    height: 60,
-    alignItems: 'flex-end',
-    padding: 10,
-  },
-  ForgotPasswordText: {
-    color: colors.white50,
+    backgroundColor: 'transparent',
   },
   BackButtonContainer: {
     width: 60,
@@ -54,11 +43,13 @@ const styles = StyleSheet.create({
   BackButtonIcon: {
     fontSize: 60,
     color: colors.white,
+    backgroundColor: 'transparent',
   },
   SignUpText: {
     fontSize: 40,
     color: colors.white,
     paddingHorizontal: 20,
+    backgroundColor: 'transparent',
   }
 })
 
