@@ -1,13 +1,17 @@
 import React from 'react'
 import {
+  View,
   TouchableOpacity,
   ScrollView,
+  StyleSheet,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-
+import TouchableItem from 'react-navigation/lib-rn/views/TouchableItem'
 import { DrawerItems, SafeAreaView } from 'react-navigation'
 
+import { StyledText as Text } from './StyledText'
 import { StatusBarSpacer } from './StatusBarSpacer'
+import colors from '../constants/colors'
 
 export class Drawer extends React.Component {
   closeMenu = () => this.props.navigation.navigate('DrawerClose')
@@ -21,8 +25,31 @@ export class Drawer extends React.Component {
             <Ionicons name='ios-close' style={{ fontSize: 40 }} />
           </TouchableOpacity>
           <DrawerItems {...this.props} />
+          <TouchableItem onPress={() => {}}>
+            <DrawerLabel title='Log Out' />
+          </TouchableItem>
         </SafeAreaView>
       </ScrollView>
     )
   }
+}
+
+const DrawerLabel = ({ focused, tintColor, title, first = false }) =>
+  <View style={[{
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    borderBottomColor: colors.gray25,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    paddingHorizontal: 20,
+  }, first && {
+    borderTopColor: colors.gray25,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  }]}>
+    <Text style={{ color: tintColor }}>{title}</Text>
+  </View>
+
+export const getDrawerLabel = (title, first) => ({ focused, tintColor }) => {
+  const props = { title, first, focused, tintColor }
+  return <DrawerLabel {...props} />
 }
