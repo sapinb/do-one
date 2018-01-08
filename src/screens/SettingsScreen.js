@@ -15,7 +15,7 @@ import { resetTo } from '../navigators/navigationActions'
 import { SettingsHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 
-import { noop } from '../utils'
+import { noop, showLogoutAlert } from '../utils'
 import colors from '../constants/colors'
 import profilePics from '../images/profilePics'
 
@@ -66,14 +66,7 @@ class SettingsScreen extends React.Component {
   openMenu = () => this.props.navigation.navigate('DrawerOpen')
 
   logOut = () => {
-    Alert.alert(
-      'Log Out',
-      'Are you sure you want to log out?',
-      [
-        {text: 'Cancel', style: 'cancel'},
-        {text: 'Log Out', onPress: () => this.props.navigation.dispatch(resetTo({ routeName: 'LoginScreen' }))}
-      ]
-    )
+    showLogoutAlert(() => this.props.navigation.dispatch(resetTo({ routeName: 'LoginScreen' })))
   }
 
   render () {

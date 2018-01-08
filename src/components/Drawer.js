@@ -9,12 +9,21 @@ import { Ionicons } from '@expo/vector-icons'
 import TouchableItem from 'react-navigation/lib-rn/views/TouchableItem'
 import { DrawerItems, SafeAreaView } from 'react-navigation'
 
+import { resetTo } from '../navigators/navigationActions'
+import { showLogoutAlert } from '../utils'
+
 import { StyledText as Text } from './StyledText'
 import { StatusBarSpacer } from './StatusBarSpacer'
 import colors from '../constants/colors'
 
 export class Drawer extends React.Component {
   closeMenu = () => this.props.navigation.navigate('DrawerClose')
+
+  logOut = () => {
+    this.props.navigation.navigate('DrawerClose')
+
+    showLogoutAlert(() => this.props.navigation.dispatch(resetTo({ routeName: 'LoginScreen' })))
+  }
 
   render () {
     return (
@@ -25,7 +34,7 @@ export class Drawer extends React.Component {
             <Ionicons name='ios-close' style={{ fontSize: 40 }} />
           </TouchableOpacity>
           <DrawerItems {...this.props} />
-          <TouchableItem onPress={() => {}}>
+          <TouchableItem onPress={this.logOut}>
             <DrawerLabel title='Log Out' />
           </TouchableItem>
         </SafeAreaView>
