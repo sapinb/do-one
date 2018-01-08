@@ -18,7 +18,7 @@ const RootNavigator = StackNavigator({
   ListScreen: { screen: ListScreen },
   CreateScreen: { screen: CreateScreen },
 }, {
-  initialRouteName: 'MainDrawer',
+  initialRouteName: 'LoginScreen',
   headerMode: 'none'
 })
 
