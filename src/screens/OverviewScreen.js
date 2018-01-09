@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native'
+import { Svg } from 'expo'
 
 import { Ionicons } from '@expo/vector-icons'
 
@@ -103,7 +104,77 @@ const MonthBar = () =>
     <Text style={styles.monthBarLowerText}>2015</Text>
   </View>
 
-const CircularGraphs = () => <View style={{ flex: 1 }} />
+const SvgCircleArc = ({ cx, cy, r, startAngle = 0, angle, ...props }) => {
+  const a0 = startAngle * Math.PI / 180
+  const a1 = angle * Math.PI / 180
+
+  const x0 = r * Math.cos(a0) + cx
+  const y0 = r * Math.sin(a0) + cy
+
+  const x1 = r * Math.cos(a1) + cx
+  const y1 = r * Math.sin(a1) + cy
+
+  const largeArcFlag = (angle - startAngle) > 180 ? 1 : 0
+
+  const d = `M ${x0} ${y0} A ${r} ${r} 0 ${largeArcFlag} 1 ${x1} ${y1}`
+  return (
+    <Svg.Path {...props} d={d} />
+  )
+}
+
+const CircleProgress = ({ progress, radius, color }) => {
+  // limit progress between 0, 100
+  progress = progress < 0 ? 0 : progress > 100 ? 100 : progress
+
+  const strokeWidth = 3
+  const dim = radius * 2 + strokeWidth * 2
+  const c = dim / 2
+  let angle = progress * 360 / 100
+
+  // ark from 0 - 360 becomes becomes empty, so limit to 359 degrees
+  if (angle > 359) angle = 359
+
+  return (
+    <View>
+      <Svg width={dim} height={dim}>
+        <Svg.Circle
+          cx={c}
+          cy={c}
+          r={radius}
+          stroke={'#fff2'}
+          strokeWidth={strokeWidth}
+          fillOpacity={0}
+        />
+        <SvgCircleArc
+          cx={c}
+          cy={c}
+          startAngle={-90}
+          angle={angle - 90}
+          r={radius}
+          stroke={color}
+          strokeWidth={strokeWidth}
+          strokeLinecap='round'
+          fillOpacity={0}
+        />
+      </Svg>
+      <View style={{ ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ color: colors.white, fontSize: radius * 0.6 }}>{progress}</Text>
+          <Text light style={{ color: colors.white, fontSize: radius * 0.3, paddingBottom: radius * 0.2, paddingLeft: 2 }}>%</Text>
+        </View>
+      </View>
+    </View>
+  )
+}
+
+const CircularGraphs = ({ angle }) =>
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ width: '100%', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-around' }}>
+      <CircleProgress progress={28} radius={35} color={colors.texasRose} />
+      <CircleProgress progress={54} radius={60} color={colors.viking} />
+      <CircleProgress progress={18} radius={35} color={colors.heliotrope} />
+    </View>
+  </View>
 
 const TaskStatItem = ({ color, title, count }) =>
   <View style={styles.taskStatItem}>
