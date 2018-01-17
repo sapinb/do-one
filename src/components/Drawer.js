@@ -13,7 +13,6 @@ import { resetTo } from '../navigators/navigationActions'
 import { showLogoutAlert } from '../utils'
 
 import { StyledText as Text } from './StyledText'
-import { StatusBarSpacer } from './StatusBarSpacer'
 import colors from '../constants/colors'
 
 export class Drawer extends React.Component {
@@ -29,7 +28,6 @@ export class Drawer extends React.Component {
     return (
       <ScrollView>
         <SafeAreaView style={{ flex: 1 }} forceInset={{ top: 'always', horizontal: 'never' }}>
-          <StatusBarSpacer />
           <TouchableOpacity onPress={this.closeMenu} style={{ width: 60, height: 60, alignItems: 'center', justifyContent: 'center' }}>
             <Ionicons name='ios-close' style={{ fontSize: 40 }} />
           </TouchableOpacity>

@@ -21,10 +21,6 @@ const MainDrawer = DrawerNavigator({
 }, {
   initialRouteName: 'HomeScreen',
   contentComponent: Drawer,
-  // https://github.com/react-navigation/react-navigation/issues/3148
-  drawerOpenRoute: 'DrawerOpen',
-  drawerCloseRoute: 'DrawerClose',
-  drawerToggleRoute: 'DrawerToggle'
 })
 
 export { MainDrawer }
