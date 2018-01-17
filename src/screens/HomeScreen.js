@@ -3,16 +3,16 @@ import {
   View,
   Image,
   StyleSheet,
-  ImageBackground,
   Animated,
   TouchableOpacity,
 } from 'react-native'
 
 import { Ionicons } from '@expo/vector-icons'
+import ParallaxScrollView from 'react-native-parallax-scroll-view'
 
 import { StyledText as Text } from '../components/StyledText'
-import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
-import { BackgroundOverlay } from '../components/BackgroundOverlay'
+import { AnimatedOpacityHeader as Header } from '../components/Header'
+import { BackgroundImage } from '../components/BackgroundImage'
 import { PlusButton } from '../components/PlusButton'
 import { TodoItem } from '../components/TodoItem'
 
@@ -73,40 +73,35 @@ class HomeScreen extends React.Component {
 
   toCreateScreen = () => this.props.navigation.navigate('CreateScreen')
 
+  renderForeground = () =>
+    <View style={{ height: 360, justifyContent: 'flex-end', alignItems: 'center' }}>
+      <Text style={{ textAlign: 'center', fontSize: 32, color: colors.white }}>Good Morning</Text>
+      <View style={{ marginVertical: 30 }}>
+        <Image source={profilePics.me()} style={{ width: 128, height: 128, borderRadius: 64 }} />
+        <Text style={{ width: 30, height: 30, color: '#fff', backgroundColor: colors.viking, fontSize: 20, borderRadius: 15, position: 'absolute', top: 5, right: 5, textAlign: 'center' }}>3</Text>
+      </View>
+      <CalendarMonth />
+    </View>
+
+  renderBackground = () => <BackgroundImage source={backgrounds.cliff()} opacity={0.25} />
+
   render () {
     const backgroundOpacity = this._animatedValue.interpolate({
       inputRange: [0, 60, 160, 210],
       outputRange: [0, 0, 0.5, 0.5],
     })
     return (
-      <ImageBackground
-        source={backgrounds.cliff()}
-        style={{ flex: 1 }}
-      >
-        <BackgroundOverlay opacity={0.25} />
+      <View style={{ flex: 1 }}>
         <Header backgroundOpacity={backgroundOpacity} onPressMenu={this.openMenu} style={{ position: 'absolute', top: 0, zIndex: 1 }} />
-        <Animated.ScrollView
-          onScroll={Animated.event([
-            {
-              nativeEvent: {
-                contentOffset: {
-                  y: this._animatedValue
-                }
-              }
-            }
-          ], { useNativeDriver: true })}
-          style={{ flex: 1 }}
-          contentContainerStyle={{ alignItems: 'center', paddingTop: HEADER_STATUSBAR_HEIGHT }}
-          showsVerticalScrollIndicator={false}
+        <ParallaxScrollView
+          animatedScrollY={this._animatedValue}
+          backgroundColor={colors.white}
+          contentBackgroundColor={colors.white}
+          parallaxHeaderHeight={360}
+          renderForeground={this.renderForeground}
+          renderBackground={this.renderBackground}
+          fadeOutForeground={false}
         >
-          <View>
-            <Text style={{ textAlign: 'center', fontSize: 32, color: colors.white }}>Good Morning</Text>
-          </View>
-          <View style={{ marginVertical: 30 }}>
-            <Image source={profilePics.me()} style={{ width: 128, height: 128, borderRadius: 64 }} />
-            <Text style={{ width: 30, height: 30, color: '#fff', backgroundColor: colors.viking, fontSize: 20, borderRadius: 15, position: 'absolute', top: 5, right: 5, textAlign: 'center' }}>3</Text>
-          </View>
-          <CalendarMonth />
           <CalendarWeek />
           <View>
             <TodoItem title='New Subpage for Janet' time='8 - 10am' imageSource={profilePics.friend1()} completed />
@@ -115,9 +110,10 @@ class HomeScreen extends React.Component {
             <TodoItem title='Lunch' time='10:00' imageSource={profilePics.friend4()} />
             <TodoItem title='Lunch' time='10:00' imageSource={profilePics.friend5()} />
           </View>
-        </Animated.ScrollView>
+
+        </ParallaxScrollView>
         <FabPlus onPress={this.toCreateScreen} />
-      </ImageBackground>
+      </View>
     )
   }
 }
