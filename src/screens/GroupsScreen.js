@@ -1,15 +1,15 @@
 import React from 'react'
 import {
   View,
-  Image,
   StyleSheet,
   TouchableHighlight,
   Animated,
 } from 'react-native'
+import ParallaxScrollView from 'react-native-parallax-scroll-view'
 
 import { StyledText as Text } from '../components/StyledText'
-import { BackgroundOverlay } from '../components/BackgroundOverlay'
-import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
+import { BackgroundImage } from '../components/BackgroundImage'
+import { AnimatedOpacityHeader as Header } from '../components/Header'
 
 import { noop } from '../utils'
 
@@ -55,40 +55,36 @@ class GroupsScreen extends React.Component {
 
   toListScreen = (groupName) => () => this.props.navigation.navigate('ListScreen', { groupName })
 
+  renderForeground = () =>
+    <View style={{ height: 200, paddingTop: 20, paddingHorizontal: 20, justifyContent: 'center' }}>
+      <Text style={{ color: colors.white, fontSize: 32 }}>My Groups</Text>
+    </View>
+
+  renderBackground = () => <BackgroundImage source={backgrounds.cloth()} opacity={0.25} />
+
   render () {
     const backgroundOpacity = this._animatedValue.interpolate({
-      inputRange: [0, 10, 60, 110],
+      inputRange: [0, 60, 160, 170],
       outputRange: [0, 0, 0.5, 0.5],
     })
     return (
       <View style={{ flex: 1 }}>
-        <Image source={backgrounds.cloth()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
-        <BackgroundOverlay />
         <Header
           style={{ position: 'absolute', top: 0, zIndex: 1 }}
           backgroundOpacity={backgroundOpacity}
           onPressMenu={this.openMenu}
         />
-        <Animated.ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{ paddingTop: HEADER_STATUSBAR_HEIGHT }}
-          onScroll={Animated.event([
-            {
-              nativeEvent: {
-                contentOffset: {
-                  y: this._animatedValue
-                }
-              }
-            }
-          ], { useNativeDriver: true })}
+        <ParallaxScrollView
+          animatedScrollY={this._animatedValue}
+          parallaxHeaderHeight={200}
+          renderForeground={this.renderForeground}
+          renderBackground={this.renderBackground}
+          fadeOutForeground={false}
         >
-          <View style={{ height: 120, paddingTop: 20, paddingHorizontal: 20 }}>
-            <Text style={{ color: colors.white, fontSize: 32 }}>My Groups</Text>
-          </View>
           <View style={{ flexDirection: 'row', width: '100%', flexWrap: 'wrap', backgroundColor: colors.white }}>
             {groups.map((group, idx) => <GroupItem key={idx} {...group} onPress={this.toListScreen(group.title)} />)}
           </View>
-        </Animated.ScrollView>
+        </ParallaxScrollView>
       </View>
     )
   }
