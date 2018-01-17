@@ -87,13 +87,14 @@ export const OverviewHeader = ({ onPressMenu = noop, onPressProfile = noop, prof
     </TouchableOpacity>
   </View>
 
-export const SettingsHeader = ({ onPressMenu = noop, onPressLogout = noop, style }) =>
+export const AnimatedSettingsHeader = ({ backgroundOpacity, onPressMenu = noop, onPressLogout = noop, style }) =>
   <View style={[{
     paddingTop: Constants.statusBarHeight,
     height: HEADER_HEIGHT + Constants.statusBarHeight,
     width: '100%',
     flexDirection: 'row',
   }, style]}>
+    <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: colors.black, opacity: backgroundOpacity }]} />
     <MenuIcon onPress={onPressMenu} />
     <View style={{ flex: 1 }} />
     <LogOutIcon onPress={onPressLogout} />

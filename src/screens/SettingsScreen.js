@@ -1,18 +1,18 @@
 import React from 'react'
 import {
   View,
-  ScrollView,
-  Image,
   StyleSheet,
   TouchableHighlight,
   Switch,
+  Animated,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import ParallaxScrollView from 'react-native-parallax-scroll-view'
 
 import { StyledText as Text } from '../components/StyledText'
 import { resetTo } from '../navigators/navigationActions'
-import { SettingsHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
-import { BackgroundOverlay } from '../components/BackgroundOverlay'
+import { AnimatedSettingsHeader as Header } from '../components/Header'
+import { BackgroundImage } from '../components/BackgroundImage'
 
 import { noop, showLogoutAlert } from '../utils'
 import colors from '../constants/colors'
@@ -54,6 +54,8 @@ const SettingSwitch = ({ title, value, onValueChange }) =>
   </View>
 
 class SettingsScreen extends React.Component {
+  _animatedValue = new Animated.Value(0)
+
   state = {
     notification: true,
     sound: false,
@@ -68,24 +70,36 @@ class SettingsScreen extends React.Component {
     showLogoutAlert(() => this.props.navigation.dispatch(resetTo({ routeName: 'LoginScreen' })))
   }
 
+  renderForeground = () =>
+    <View style={{ height: 240, justifyContent: 'flex-end' }}>
+      <Text style={{ color: colors.white, fontSize: 36, padding: 20 }}>Nicole James</Text>
+    </View>
+
+  renderBackground = () => <BackgroundImage source={profilePics.myBanner()} opacity={0.25} />
+
   render () {
     const { sound, notification } = this.state
+
+    const backgroundOpacity = this._animatedValue.interpolate({
+      inputRange: [0, 60, 160, 170],
+      outputRange: [0, 0, 0.5, 0.5],
+    })
+
     return (
       <View style={{ flex: 1 }}>
-        <Image source={profilePics.myBanner()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
-        <BackgroundOverlay />
         <Header
+          backgroundOpacity={backgroundOpacity}
           onPressMenu={this.openMenu}
           onPressLogout={this.logOut}
           style={{ position: 'absolute', top: 0, zIndex: 1 }}
         />
-        <ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{ paddingTop: HEADER_STATUSBAR_HEIGHT }}
+        <ParallaxScrollView
+          animatedScrollY={this._animatedValue}
+          parallaxHeaderHeight={240}
+          renderForeground={this.renderForeground}
+          renderBackground={this.renderBackground}
+          fadeOutForeground={false}
         >
-          <View style={{ height: 160, justifyContent: 'flex-end' }}>
-            <Text style={{ color: colors.white, fontSize: 36, padding: 20 }}>Nicole James</Text>
-          </View>
           <SettingItem title='General' />
           <SettingSwitch title='Notification' value={notification} onValueChange={this.onChangeNotification} />
           <SettingSwitch title='Sound' value={sound} onValueChange={this.onChangeSound} />
@@ -93,7 +107,8 @@ class SettingsScreen extends React.Component {
           <SettingItem title='Support' />
           <SettingItem title='Privacy' />
           <SettingItem title='Logout' onPress={this.logOut} />
-        </ScrollView>
+
+        </ParallaxScrollView>
       </View>
     )
   }
