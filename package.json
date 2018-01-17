@@ -34,6 +34,7 @@
     "react": "16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
     "react-native-calendars": "^1.16.1",
+    "react-native-parallax-scroll-view": "https://github.com/sapinb/react-native-parallax-scroll-view.git",
     "react-native-swiper": "^1.5.13",
     "react-navigation": "^1.0.0-beta.27",
     "recompose": "^0.26.0"
