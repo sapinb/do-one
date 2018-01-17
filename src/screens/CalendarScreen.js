@@ -1,17 +1,17 @@
 import React from 'react'
 import {
   View,
-  Image,
   StyleSheet,
   Animated,
   TouchableOpacity,
 } from 'react-native'
+import ParallaxScrollView from 'react-native-parallax-scroll-view'
 
 import { Calendar } from 'react-native-calendars'
 
 import { StyledText as Text } from '../components/StyledText'
-import { BackgroundOverlay } from '../components/BackgroundOverlay'
-import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
+import { BackgroundImage } from '../components/BackgroundImage'
+import { AnimatedOpacityHeader as Header } from '../components/Header'
 import { PlusButton } from '../components/PlusButton'
 import { TodoItem } from '../components/TodoItem'
 
@@ -36,41 +36,39 @@ class CalendarScreen extends React.Component {
 
   toCreateScreen = () => this.props.navigation.navigate('CreateScreen')
 
+  renderForeground = () =>
+    <View style={{ height: 200, justifyContent: 'flex-end' }}>
+      <View style={{ height: 120, paddingHorizontal: 20, justifyContent: 'space-between', paddingBottom: 15 }}>
+        <Text style={{ color: colors.white, fontSize: 32 }}>February <Text style={{ color: colors.white50 }}>2015</Text></Text>
+        <View style={{ flexDirection: 'row' }}>
+          <DateRangeItem title='DAY' />
+          <DateRangeItem title='WEEK' />
+          <DateRangeItem title='MONTH' active />
+        </View>
+      </View>
+    </View>
+
+  renderBackground = () => <BackgroundImage source={backgrounds.snowyTree()} opacity={0.25} />
+
   render () {
     const backgroundOpacity = this._animatedValue.interpolate({
-      inputRange: [0, 10, 60, 110],
+      inputRange: [0, 60, 160, 170],
       outputRange: [0, 0, 0.5, 0.5],
     })
     return (
       <View style={{ flex: 1 }}>
-        <Image source={backgrounds.snowyTree()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
-        <BackgroundOverlay />
         <Header
           style={{ position: 'absolute', top: 0, zIndex: 1 }}
           backgroundOpacity={backgroundOpacity}
           onPressMenu={this.openMenu}
         />
-        <Animated.ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{ paddingTop: HEADER_STATUSBAR_HEIGHT }}
-          onScroll={Animated.event([
-            {
-              nativeEvent: {
-                contentOffset: {
-                  y: this._animatedValue
-                }
-              }
-            }
-          ], { useNativeDriver: true })}
+        <ParallaxScrollView
+          animatedScrollY={this._animatedValue}
+          parallaxHeaderHeight={200}
+          renderForeground={this.renderForeground}
+          renderBackground={this.renderBackground}
+          fadeOutForeground={false}
         >
-          <View style={{ height: 120, paddingHorizontal: 20, justifyContent: 'space-between', paddingBottom: 15 }}>
-            <Text style={{ color: colors.white, fontSize: 32 }}>February <Text style={{ color: colors.white50 }}>2015</Text></Text>
-            <View style={{ flexDirection: 'row' }}>
-              <DateRangeItem title='DAY' />
-              <DateRangeItem title='WEEK' />
-              <DateRangeItem title='MONTH' active />
-            </View>
-          </View>
           <Calendar
             current='2015-02-08'
             markedDates={{
@@ -118,7 +116,7 @@ class CalendarScreen extends React.Component {
           <TodoItem title='Lunch with Diane' time='1pm  Restaurant' imageSource={profilePics.friend3()} />
           <TodoItem title='Catch up with Tom' time='10:00' imageSource={profilePics.friend4()} />
           <TodoItem title='Lunch with Diane' time='10:00' imageSource={profilePics.friend5()} />
-        </Animated.ScrollView>
+        </ParallaxScrollView>
         <FabPlus onPress={this.toCreateScreen} />
       </View>
     )
