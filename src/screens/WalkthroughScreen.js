@@ -45,7 +45,6 @@ class WalkthroughScreen extends React.Component {
     } else {
       // go to next page
       this.props.navigation.dispatch(resetTo({ routeName: 'MainDrawer' }))
-
     }
   }
 
