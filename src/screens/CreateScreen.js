@@ -16,7 +16,6 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import { StyledText as Text } from '../components/StyledText'
 import { AnimatedCreateHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
 import { BackgroundImage } from '../components/BackgroundImage'
-import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { PlusButton, PLUS_BUTTON_HALF_HEIGHT } from '../components/PlusButton'
 
 import { noop } from '../utils'

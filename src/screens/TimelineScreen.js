@@ -3,7 +3,6 @@ import {
   View,
   SectionList,
   Animated,
-  StyleSheet,
 } from 'react-native'
 
 import { StyledText as Text } from '../components/StyledText'
