@@ -64,26 +64,28 @@ class TimelineScreen extends React.Component {
 
   renderAnimatedBackground = () =>
     <Animated.View
-      style={[
-        StyleSheet.absoluteFill,
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '50%',
+        transform: [{
+          scale: this._animatedValue.interpolate({
+            inputRange: [-240, 0],
+            outputRange: [5, 1],
+            extrapolate: 'clamp',
+          })
+        },
         {
-          transform: [{
-            scale: this._animatedValue.interpolate({
-              inputRange: [-240, 0],
-              outputRange: [5, 1],
-              extrapolate: 'clamp',
-            })
-          },
-          {
-            translateY: this._animatedValue.interpolate({
-              inputRange: [0, 240],
-              outputRange: [0, -(240 / 2)],
-              extrapolateRight: 'extend',
-              extrapolateLeft: 'clamp'
-            })
-          }]
-        }
-      ]}>
+          translateY: this._animatedValue.interpolate({
+            inputRange: [0, 240],
+            outputRange: [0, -(240 / 2)],
+            extrapolateRight: 'extend',
+            extrapolateLeft: 'clamp'
+          })
+        }]
+      }}>
       <BackgroundImage source={backgrounds.cliff()} opacity={0.25} />
     </Animated.View>
 
