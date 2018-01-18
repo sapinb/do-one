@@ -11,9 +11,11 @@ import {
   ToastAndroid,
 } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
+import ParallaxScrollView from 'react-native-parallax-scroll-view'
 
 import { StyledText as Text } from '../components/StyledText'
 import { AnimatedCreateHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
+import { BackgroundImage } from '../components/BackgroundImage'
 import { BackgroundOverlay } from '../components/BackgroundOverlay'
 import { PlusButton, PLUS_BUTTON_HALF_HEIGHT } from '../components/PlusButton'
 
@@ -143,53 +145,52 @@ class CreateScreen extends React.Component {
     this.goBack()
   }
 
+  renderForeground = () =>
+    <View style={{ height: 240, paddingTop: HEADER_STATUSBAR_HEIGHT }}>
+      <View style={{ height: 120, paddingTop: 20, paddingHorizontal: 20 }}>
+        <TextInput
+          style={{ color: colors.white, fontSize: 32 }}
+          placeholder='Add Title'
+          placeholderTextColor={colors.white}
+          underlineColorAndroid='transparent'
+        />
+      </View>
+      <View style={{ backgroundColor: colors.white, flex: 1 }} />
+      <PlusButton
+        style={{
+          position: 'absolute',
+          top: HEADER_STATUSBAR_HEIGHT + 120 - PLUS_BUTTON_HALF_HEIGHT,
+          right: 20,
+          zIndex: 1,
+        }}
+        onPress={this.handleAdd}
+      />
+    </View>
+
+  renderBackground = () => <BackgroundImage source={backgrounds.waves()} opacity={0.25} />
+
   render () {
     const { allDay } = this.state
 
     const backgroundOpacity = this._animatedValue.interpolate({
-      inputRange: [0, 10, 60, 110],
+      inputRange: [0, 60, 160, 170],
       outputRange: [0, 0, 0.5, 0.5],
     })
     return (
       <View style={{ flex: 1 }}>
-        <Image source={backgrounds.waves()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
-        <BackgroundOverlay />
         <Header
           style={{ position: 'absolute', top: 0, zIndex: 1 }}
           backgroundOpacity={backgroundOpacity}
           onPressClose={this.goBack}
         />
-        <Animated.ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{ paddingTop: HEADER_STATUSBAR_HEIGHT }}
-          onScroll={Animated.event([
-            {
-              nativeEvent: {
-                contentOffset: {
-                  y: this._animatedValue
-                }
-              }
-            }
-          ], { useNativeDriver: true })}
+        <ParallaxScrollView
+          animatedScrollY={this._animatedValue}
+          parallaxHeaderHeight={240}
+          renderForeground={this.renderForeground}
+          renderBackground={this.renderBackground}
+          fadeOutForeground={false}
         >
-          <View style={{ height: 120, paddingTop: 20, paddingHorizontal: 20 }}>
-            <TextInput
-              style={{ color: colors.white, fontSize: 32 }}
-              placeholder='Add Title'
-              placeholderTextColor={colors.white}
-              underlineColorAndroid='transparent'
-            />
-          </View>
-          <PlusButton
-            style={{
-              position: 'absolute',
-              top: HEADER_STATUSBAR_HEIGHT + 120 - PLUS_BUTTON_HALF_HEIGHT,
-              right: 20,
-              zIndex: 1,
-            }}
-            onPress={this.handleAdd}
-          />
-          <View style={{ backgroundColor: colors.white, paddingTop: 30 }}>
+          <View style={{ backgroundColor: colors.white }}>
             <ShortDescOption />
             <TimeOption allDay={allDay} onAllDayValueChange={this.setAllDay} />
             <LocationOption value='Starbucks' />
@@ -197,7 +198,7 @@ class CreateScreen extends React.Component {
             <PeopleOption peopleImageSources={[profilePics.friend1(), profilePics.friend3(), profilePics.friend5()]} />
             <OptionItem title='Repeat' value='Monthly' />
           </View>
-        </Animated.ScrollView>
+        </ParallaxScrollView>
       </View>
     )
   }
