@@ -70,13 +70,14 @@ export const AnimatedOpacityHeader = ({ backgroundOpacity, onPressMenu = noop, o
     <SearchIcon onPress={onPressSearch} />
   </View>
 
-export const OverviewHeader = ({ onPressMenu = noop, onPressProfile = noop, profileImageSource, hasDot, style }) =>
+export const AnimatedOverviewHeader = ({ backgroundOpacity, onPressMenu = noop, onPressProfile = noop, profileImageSource, hasDot, style }) =>
   <View style={[{
     paddingTop: Constants.statusBarHeight,
     height: HEADER_HEIGHT + Constants.statusBarHeight,
     width: '100%',
     flexDirection: 'row',
   }, style]}>
+    <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: colors.black, opacity: backgroundOpacity }]} />
     <MenuIcon onPress={onPressMenu} />
     <View style={{ flex: 1 }} />
     <TouchableOpacity onPress={onPressProfile} style={styles.touchableContainer}>

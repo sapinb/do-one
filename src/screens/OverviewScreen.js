@@ -1,17 +1,18 @@
 import React from 'react'
 import {
   View,
-  ImageBackground,
   StyleSheet,
   TouchableOpacity,
+  Animated,
 } from 'react-native'
 import { Svg } from 'expo'
+import ParallaxScrollView from 'react-native-parallax-scroll-view'
 
 import { Ionicons } from '@expo/vector-icons'
 
 import { StyledText as Text } from '../components/StyledText'
-import { OverviewHeader as Header } from '../components/Header'
-import { BackgroundOverlay } from '../components/BackgroundOverlay'
+import { AnimatedOverviewHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
+import { BackgroundImage } from '../components/BackgroundImage'
 import colors from '../constants/colors'
 import backgrounds from '../images/backgrounds'
 import profilePics from '../images/profilePics'
@@ -184,31 +185,53 @@ const TaskStatItem = ({ color, title, count }) =>
   </View>
 
 class OverviewScreen extends React.Component {
+  _animatedValue = new Animated.Value(0)
+
   openMenu = () => this.props.navigation.navigate('DrawerOpen')
 
+  renderForeground = () =>
+    <View style={{ height: 400, paddingTop: HEADER_STATUSBAR_HEIGHT, justifyContent: 'flex-end' }}>
+      <MonthBar />
+      <CircularGraphs />
+      <Text style={styles.commentText}>
+        Good job, you've completed 6%{'\n'}more tasks this month.
+      </Text>
+      <View>
+        <View style={styles.graphButtonBg} />
+        <TouchableOpacity style={styles.graphButton} onPress={noop}>
+          <Ionicons name='ios-stats-outline' style={styles.graphButtonIcon} />
+        </TouchableOpacity>
+      </View>
+    </View>
+
+  renderBackground = () => <BackgroundImage source={backgrounds.snowyTree()} opacity={0.25} />
+
   render () {
+    const backgroundOpacity = this._animatedValue.interpolate({
+      inputRange: [0, 60, 160, 170],
+      outputRange: [0, 0, 0.5, 0.5],
+    })
     return (
-      <ImageBackground
-        source={backgrounds.snowyTree()}
-        style={{ flex: 1 }}
-      >
-        <BackgroundOverlay />
-        <Header profileImageSource={profilePics.me()} hasDot onPressMenu={this.openMenu} />
-        <MonthBar />
-        <CircularGraphs />
-        <Text style={styles.commentText}>
-          Good job, you've completed 6%{'\n'}more tasks this month.
-        </Text>
-        <View>
-          <View style={styles.graphButtonBg} />
-          <TouchableOpacity style={styles.graphButton} onPress={noop}>
-            <Ionicons name='ios-stats-outline' style={styles.graphButtonIcon} />
-          </TouchableOpacity>
-        </View>
-        <TaskStatItem color={colors.viking} title='Completed' count='108' />
-        <TaskStatItem color={colors.texasRose} title='Snoozed' count='56' />
-        <TaskStatItem color={colors.heliotrope} title='Overdue' count='36' />
-      </ImageBackground>
+      <View style={{ flex: 1 }}>
+        <Header
+          style={{ position: 'absolute', top: 0, zIndex: 1 }}
+          backgroundOpacity={backgroundOpacity}
+          onPressMenu={this.openMenu}
+          profileImageSource={profilePics.me()}
+          hasDot
+        />
+        <ParallaxScrollView
+          animatedScrollY={this._animatedValue}
+          parallaxHeaderHeight={400}
+          renderForeground={this.renderForeground}
+          renderBackground={this.renderBackground}
+          fadeOutForeground={false}
+        >
+          <TaskStatItem color={colors.viking} title='Completed' count='108' />
+          <TaskStatItem color={colors.texasRose} title='Snoozed' count='56' />
+          <TaskStatItem color={colors.heliotrope} title='Overdue' count='36' />
+        </ParallaxScrollView>
+      </View>
     )
   }
 }
