@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Image,
   StyleSheet,
   TouchableHighlight,
   Animated,
@@ -11,7 +10,7 @@ import { get } from 'lodash'
 
 import { StyledText as Text } from '../components/StyledText'
 import { AnimatedListHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
-import { BackgroundOverlay } from '../components/BackgroundOverlay'
+import { BackgroundImage } from '../components/BackgroundImage'
 import { PlusButton, PLUS_BUTTON_HALF_HEIGHT } from '../components/PlusButton'
 
 import { noop } from '../utils'
@@ -71,18 +70,44 @@ class ListScreen extends React.Component {
 
   goBack = () => this.props.navigation.goBack()
 
+  renderAnimatedBackground = () =>
+    <Animated.View
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '50%',
+        transform: [{
+          scale: this._animatedValue.interpolate({
+            inputRange: [-240, 0],
+            outputRange: [5, 1],
+            extrapolate: 'clamp',
+          })
+        },
+        {
+          translateY: this._animatedValue.interpolate({
+            inputRange: [0, 240],
+            outputRange: [0, -(240 / 2)],
+            extrapolateRight: 'extend',
+            extrapolateLeft: 'clamp'
+          })
+        }]
+      }}>
+      <BackgroundImage source={backgrounds.sandwich()} opacity={0.25} />
+    </Animated.View>
+
   render () {
     const { items } = this.state
     const groupName = get(this.props, 'navigation.state.params.groupName', 'Shop')
 
     const backgroundOpacity = this._animatedValue.interpolate({
-      inputRange: [0, 10, 60, 110],
+      inputRange: [0, 60, 160, 170],
       outputRange: [0, 0, 0.5, 0.5],
     })
     return (
       <View style={{ flex: 1 }}>
-        <Image source={backgrounds.sandwich()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
-        <BackgroundOverlay />
+        {this.renderAnimatedBackground()}
         <Header
           style={{ position: 'absolute', top: 0, zIndex: 1 }}
           backgroundOpacity={backgroundOpacity}
