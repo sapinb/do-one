@@ -1,10 +1,9 @@
 import React from 'react'
 import {
   View,
-  StyleSheet,
   SectionList,
-  Image,
   Animated,
+  StyleSheet,
 } from 'react-native'
 
 import { StyledText as Text } from '../components/StyledText'
@@ -14,7 +13,7 @@ import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../com
 import backgrounds from '../images/backgrounds'
 import profilePics from '../images/profilePics'
 import colors from '../constants/colors'
-import { BackgroundOverlay } from '../components/BackgroundOverlay'
+import { BackgroundImage } from '../components/BackgroundImage'
 
 const data = [
   {
@@ -63,6 +62,31 @@ class TimelineScreen extends React.Component {
 
   openMenu = () => this.props.navigation.navigate('DrawerOpen')
 
+  renderAnimatedBackground = () =>
+    <Animated.View
+      style={[
+        StyleSheet.absoluteFill,
+        {
+          transform: [{
+            scale: this._animatedValue.interpolate({
+              inputRange: [-240, 0],
+              outputRange: [5, 1],
+              extrapolate: 'clamp',
+            })
+          },
+          {
+            translateY: this._animatedValue.interpolate({
+              inputRange: [0, 240],
+              outputRange: [0, -(240 / 2)],
+              extrapolateRight: 'extend',
+              extrapolateLeft: 'clamp'
+            })
+          }]
+        }
+      ]}>
+      <BackgroundImage source={backgrounds.cliff()} opacity={0.25} />
+    </Animated.View>
+
   render () {
     const backgroundOpacity = this._animatedValue.interpolate({
       inputRange: [0, 10, 60, 110],
@@ -70,9 +94,8 @@ class TimelineScreen extends React.Component {
     })
 
     return (
-      <View>
-        <Image source={backgrounds.cliff()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
-        <BackgroundOverlay />
+      <View style={{ flex: 1 }}>
+        {this.renderAnimatedBackground()}
         <Header
           onPressMenu={this.openMenu}
           backgroundOpacity={backgroundOpacity}
