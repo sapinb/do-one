@@ -4,12 +4,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  Animated,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import ParallaxScrollView from 'react-native-parallax-scroll-view'
 
 import { StyledText as Text } from '../components/StyledText'
-import { Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
-import { BackgroundOverlay } from '../components/BackgroundOverlay'
+import { AnimatedOpacityHeader as Header, HEADER_STATUSBAR_HEIGHT } from '../components/Header'
+import { BackgroundImage } from '../components/BackgroundImage'
 import { PLUS_BUTTON_HEIGHT, PLUS_BUTTON_HALF_HEIGHT } from '../components/PlusButton'
 
 import colors from '../constants/colors'
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingHorizontal: 20,
     flex: 1,
-    paddingBottom: 10,
+    paddingVertical: 30,
   },
 
   taskStatsContainer: {
@@ -142,30 +144,52 @@ const graphData = [
 ]
 
 class ProfileScreen extends React.Component {
+  _animatedValue = new Animated.Value(0)
+
   openMenu = () => this.props.navigation.navigate('DrawerOpen')
 
+  renderForeground = () =>
+    <View style={{ height: 240, paddingTop: HEADER_STATUSBAR_HEIGHT }}>
+      <View style={{ height: 120, justifyContent: 'flex-end' }}>
+        <Text style={{ color: colors.white, fontSize: 36, padding: 20 }}>Nicole James</Text>
+      </View>
+      <TouchableOpacity style={[styles.moreButton, {
+        position: 'absolute',
+        top: HEADER_STATUSBAR_HEIGHT + 120 - PLUS_BUTTON_HALF_HEIGHT,
+        right: 20,
+        zIndex: 1,
+      }]} onPress={noop}>
+        <Ionicons name='ios-more-outline' style={styles.moreButtonIcon} />
+      </TouchableOpacity>
+      <View style={{ backgroundColor: colors.white }}>
+        <MonthSelector month='FEBRUARY' year='2015' />
+      </View>
+    </View>
+
+  renderBackground = () => <BackgroundImage source={profilePics.myBanner()} opacity={0.25} />
+
   render () {
+    const backgroundOpacity = this._animatedValue.interpolate({
+      inputRange: [0, 60, 160, 170],
+      outputRange: [0, 0, 0.5, 0.5],
+    })
     return (
       <View style={{ flex: 1 }}>
-        <Image source={profilePics.myBanner()} style={{ position: 'absolute', top: 0, width: '100%', height: 240, resizeMode: 'cover' }} />
-        <BackgroundOverlay />
-        <Header onPressMenu={this.openMenu} />
-        <View style={{ height: 120, justifyContent: 'flex-end' }}>
-          <Text style={{ color: colors.white, fontSize: 36, padding: 20 }}>Nicole James</Text>
-        </View>
-        <TouchableOpacity style={[styles.moreButton, {
-          position: 'absolute',
-          top: HEADER_STATUSBAR_HEIGHT + 120 - PLUS_BUTTON_HALF_HEIGHT,
-          right: 20,
-          zIndex: 1,
-        }]} onPress={noop}>
-          <Ionicons name='ios-more-outline' style={styles.moreButtonIcon} />
-        </TouchableOpacity>
-        <View style={{ flex: 1, backgroundColor: colors.white }}>
-          <MonthSelector month='FEBRUARY' year='2015' />
+        <Header
+          style={{ position: 'absolute', top: 0, zIndex: 1 }}
+          backgroundOpacity={backgroundOpacity}
+          onPressMenu={this.openMenu}
+        />
+        <ParallaxScrollView
+          animatedScrollY={this._animatedValue}
+          parallaxHeaderHeight={240}
+          renderForeground={this.renderForeground}
+          renderBackground={this.renderBackground}
+          fadeOutForeground={false}
+        >
           <TaskGraph data={graphData} />
           <TaskStats completed={57} snoozed={19} overdue={4} />
-        </View>
+        </ParallaxScrollView>
       </View>
     )
   }
